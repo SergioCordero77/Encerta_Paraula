@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joc encertar paraula</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+    <!-- Título principal -->
+    <h1>Joc encertar paraula</h1>
+
+    <p class="required-note">* Camp obligatori</p>
+
+    <!-- Opciones de número de jugadores -->
+    <div class="radio-group">
+      <label>
+        <input type="radio" name="jugadors" value="1" checked> 1 jugador
+      </label>
+      <label>
+        <input type="radio" name="jugadors" value="2"> 2 jugadors
+      </label>
+    </div>
+
+    <!-- Campo de entrada del jugador -->
+    <div class="input-section">
+      <span class="help-text">Entre 4 i 14 caràcters: lletres, números i _</span>
+      <div class="input-row">
+        <label for="player1">Introdueix el nom del jugador 1: <span class="asterisk">*</span></label>
+        <input type="text" id="player1" placeholder="Exemple: Anna_23">
+      </div>
+    </div>
+
+    <!-- Sección Puntuació més alta -->
+    <section>
+      <h2>Puntuació més alta</h2>
+      <p class="info-text">No hi ha puntuació actual</p>
+    </section>
+
+    <!-- Sección Informació navegador -->
+    <section>
+      <h2>Informació navegador</h2>
+      <p class="info-text">Chrome</p>
+    </section>
+
+    <!-- Sección Idioma del joc -->
+    <section>
+      <h2>Idioma del joc</h2>
+      <p class="info-text">ca</p>
+    </section>
+
+    <!-- Sección Informació URL -->
+    <section>
+      <h2>Informació URL</h2>
+      <p class="info-text">http://127.0.0.1:5501</p>
+    </section>
+
+    <!-- Botones de acción -->
+    <div class="button-group">
+      <button type="button">Començar partida</button>
+      <button type="button">Borrar puntuació</button>
+    </div>
+  </div>
+
+</body>
+</html>
