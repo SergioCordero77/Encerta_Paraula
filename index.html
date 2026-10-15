@@ -1,68 +1,190 @@
 <!DOCTYPE html>
-<html lang="ca">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Joc encertar paraula</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+  <html lang="ca">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <div class="container">
-    <!-- Título principal -->
-    <h1>Joc encertar paraula</h1>
+      <title>Joc d'encertar la paraula</title>
 
-    <p class="required-note">* Camp obligatori</p>
+      <link rel="stylesheet" href="css/style.css">
+      <script src="js/script.js" defer></script>
+    </head>
+    <body>
 
-    <!-- Opciones de número de jugadores -->
-    <div class="radio-group">
-      <label>
-        <input type="radio" name="jugadors" value="1" checked> 1 jugador
-      </label>
-      <label>
-        <input type="radio" name="jugadors" value="2"> 2 jugadors
-      </label>
-    </div>
+      <!-- Contenidor principal del joc -->
+      <main id="main-content" class="container" aria-labelledby="main-title">
 
-    <!-- Campo de entrada del jugador -->
-    <div class="input-section">
-      <span class="help-text">Entre 4 i 14 caràcters: lletres, números i _</span>
-      <div class="input-row">
-        <label for="player1">Introdueix el nom del jugador 1: <span class="asterisk">*</span></label>
-        <input type="text" id="player1" placeholder="Exemple: Anna_23">
-      </div>
-    </div>
+        <!-- Títol principal -->
+        <h1 id="main-title">Joc d'encertar la paraula</h1>
 
-    <!-- Sección Puntuació més alta -->
-    <section>
-      <h2>Puntuació més alta</h2>
-      <p class="info-text">No hi ha puntuació actual</p>
-    </section>
+        <!-- Avís sobre els camps obligatoris -->
+        <p id="required-note" class="required-note">
+          <span aria-hidden="true">*</span> Camp obligatori
+        </p>
 
-    <!-- Sección Informació navegador -->
-    <section>
-      <h2>Informació navegador</h2>
-      <p class="info-text">Chrome</p>
-    </section>
+        <!-- Formulari de configuració de la partida -->
+        <form id="game-form" aria-describedby="required-note">
 
-    <!-- Sección Idioma del joc -->
-    <section>
-      <h2>Idioma del joc</h2>
-      <p class="info-text">ca</p>
-    </section>
+          <!-- Selecció del nombre de jugadors -->
+          <fieldset id="players-fieldset" class="radio-group">
+            <legend>Nombre de jugadors</legend>
 
-    <!-- Sección Informació URL -->
-    <section>
-      <h2>Informació URL</h2>
-      <p class="info-text">http://127.0.0.1:5501</p>
-    </section>
+            <div>
+              <input
+                type="radio"
+                id="players-1"
+                name="jugadors"
+                value="1"
+                checked
+              >
+              <label for="players-1">1 jugador</label>
+            </div>
 
-    <!-- Botones de acción -->
-    <div class="button-group">
-      <button type="button">Començar partida</button>
-      <button type="button">Borrar puntuació</button>
-    </div>
-  </div>
+            <div>
+              <input
+                type="radio"
+                id="players-2"
+                name="jugadors"
+                value="2"
+              >
+              <label for="players-2">2 jugadors</label>
+            </div>
+          </fieldset>
 
-</body>
-</html>
+          <!-- Secció d'introducció dels noms dels jugadors -->
+          <section id="player-input-section" class="input-section"
+            aria-labelledby="player-section-title">
+
+            <h2 id="player-section-title">Dades dels jugadors</h2>
+
+            <!-- Instruccions per introduir el nom -->
+            <p id="player-name-help" class="help-text">
+              Introdueix entre 4 i 14 caràcters: lletres, números i guió baix (_).
+            </p>
+
+            <!-- Camp del nom del primer jugador -->
+            <div id="player-1-row" class="input-row">
+              <label for="player1">
+                Nom del jugador 1
+                <span aria-hidden="true">*</span>
+              </label>
+
+              <input
+                type="text"
+                id="player1"
+                name="player1"
+                placeholder="Exemple: Anna_23"
+                minlength="4"
+                maxlength="14"
+                pattern="[A-Za-zÀ-ÿ0-9_]{4,14}"
+                autocomplete="off"
+                required
+                aria-required="true"
+                aria-describedby="player-name-help"
+              >
+            </div>
+
+            <!-- Camp del nom del segon jugador, inicialment ocult -->
+            <div id="player-2-row" class="input-row" hidden>
+              <label for="player2">
+                Nom del jugador 2
+                <span aria-hidden="true">*</span>
+              </label>
+
+              <input
+                type="text"
+                id="player2"
+                name="player2"
+                placeholder="Exemple: Marc_24"
+                minlength="4"
+                maxlength="14"
+                pattern="[A-Za-zÀ-ÿ0-9_]{4,14}"
+                autocomplete="off"
+                aria-describedby="player-name-help"
+                disabled
+              >
+            </div>
+
+          </section>
+
+          <!-- Secció de puntuació més alta -->
+          <section id="high-score-section" aria-labelledby="high-score-title">
+            <h2 id="high-score-title">Puntuació més alta</h2>
+
+            <p id="high-score-value" class="info-text">
+              No hi ha puntuació actual
+            </p>
+          </section>
+
+          <!-- Secció d'informació del navegador -->
+          <section id="browser-section" aria-labelledby="browser-title">
+            <h2 id="browser-title">Informació del navegador</h2>
+
+            <p id="browser-value" class="info-text">
+              <!-- El navegador es pot actualitzar mitjançant JavaScript -->
+              Chrome
+            </p>
+          </section>
+
+          <!-- Secció de l'idioma del joc -->
+          <section id="language-section" aria-labelledby="language-title">
+            <h2 id="language-title">Idioma del joc</h2>
+
+            <p id="language-value" class="info-text" lang="ca">
+              ca
+            </p>
+          </section>
+
+          <!-- Secció d'informació de la URL -->
+          <section id="url-section" aria-labelledby="url-title">
+            <h2 id="url-title">Informació de la URL</h2>
+
+            <p id="url-value" class="info-text">
+              http://127.0.0.1:5501
+            </p>
+          </section>
+
+          <!-- Zona per comunicar missatges d'estat als lectors de pantalla -->
+          <p
+            id="status-message"
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+          ></p>
+
+          <!-- Zona per comunicar errors importants -->
+          <p
+            id="error-message"
+            role="alert"
+            aria-atomic="true"
+          ></p>
+
+          <!-- Botons d'acció de la partida -->
+          <div id="game-actions" class="button-group">
+
+            <button
+              type="submit"
+              id="start-game-button"
+              aria-label="Començar una partida nova"
+            >
+              Començar partida
+            </button>
+
+            <button
+              type="button"
+              id="clear-score-button"
+              aria-label="Esborrar la puntuació més alta desada"
+            >
+              Esborrar puntuació
+            </button>
+
+          </div>
+
+        </form>
+      </main>
+
+      <!-- Punt d'entrada del codi JavaScript -->
+      <script src="script.js" defer></script>
+
+    </body>
+  </html>

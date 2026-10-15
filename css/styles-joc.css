@@ -1,0 +1,218 @@
+/* ==========================================================================
+   Estils Generals i Reset Bàsic
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #f1f8db; /* Fons verd clar general */
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    color: #000;
+}
+
+/* ==========================================================================
+   Barra Superior (Header / Menu)
+   ========================================================================== */
+.top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* Botons verdosos superiors */
+.btn-green {
+    background-color: #c0f179;
+    border: 2px solid #000;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-green:hover {
+    background-color: #aee85a;
+}
+
+.btn-green:active {
+    transform: scale(0.98);
+}
+
+/* Camp d'entrada de la paraula */
+.input-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1rem;
+}
+
+.label-idioma {
+    font-weight: bold;
+}
+
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.input-wrapper input {
+    padding: 6px 35px 6px 10px;
+    border: 1px solid #777;
+    border-radius: 2px;
+    font-family: inherit;
+    width: 260px;
+    font-size: 0.9rem;
+}
+
+/* Botó d'ull per veure la paraula */
+.btn-eye {
+    position: absolute;
+    right: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 2px 5px;
+}
+
+/* ==========================================================================
+   Banner del Títol Principal
+   ========================================================================== */
+.banner-title {
+    background-color: #c9d2f8; /* Blau lilós del títol */
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+}
+
+.banner-title h1 {
+    font-size: 2.3rem;
+    font-weight: normal;
+    letter-spacing: 2px;
+}
+
+/* ==========================================================================
+   Àrea Principal de Joc (Estadístiques + Imatge)
+   ========================================================================== */
+.game-area {
+    background-color: #fbd6c6; /* Fons rosat / taronja clar */
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 40px;
+    min-height: 320px;
+}
+
+/* Targeta d'estadístiques del jugador */
+.stats-card {
+    background-color: #b1486d; /* Granat / fúcsia fosc */
+    color: #ffffff;
+    border-radius: 15px;
+    width: 250px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+}
+
+.stats-header {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-decoration: underline;
+}
+
+.stats-body {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 0.8rem;
+}
+
+.stat-label {
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-top: 4px;
+}
+
+.stat-value {
+    margin-bottom: 6px;
+}
+
+/* Marc de la imatge */
+.image-box {
+    border: 2px solid #000;
+    border-radius: 15px;
+    width: 320px;
+    height: 240px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    margin: 0 auto; /* Centrat si cal */
+}
+
+.image-box img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+}
+
+/* ==========================================================================
+   Teclat de Lletres (Separació inferior millorada)
+   ========================================================================== */
+.keyboard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    /* Afegim margin-bottom i padding per evitar que les lletres quedin enganxades a la part inferior */
+    margin-top: 10px;
+    margin-bottom: 25px; 
+    padding-bottom: 10px;
+}
+
+/* Estil dels botons individuals del teclat */
+.key-btn {
+    background-color: #c0f179;
+    border: 1px solid #77b822;
+    border-radius: 6px;
+    color: #d10000; /* Lletres en vermell com en la imatge */
+    font-weight: bold;
+    font-size: 1.1rem;
+    font-family: inherit;
+    width: 38px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 0 #888;
+    transition: background-color 0.1s, transform 0.1s;
+}
+
+.key-btn:hover {
+    background-color: #aee85a;
+}
+
+.key-btn:focus-visible {
+    outline: 3px solid #000;
+}
+
+.key-btn:active {
+    transform: translateY(2px);
+    box-shadow: none;
+}

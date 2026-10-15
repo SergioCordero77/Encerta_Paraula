@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joc del Penjat / Començar partida</title>
+    <link rel="stylesheet" href="css/styles-joc.css">
+</head>
+<body>
+
+    <!-- Capçalera amb botons superiors i camp de cerca / paraula -->
+    <header class="top-bar" role="banner">
+        <button id="btn-tornar" class="btn btn-green" aria-label="Tornar a la pàgina anterior">&lt;&lt; Tornar</button>
+        <button id="btn-instruccions" class="btn btn-green" aria-label="Mostrar instruccions del joc">Instruccions</button>
+        
+        <div class="input-container">
+            <label for="input-paraula" class="label-idioma">Idioma (ca)</label>
+            <div class="input-wrapper">
+                <input type="password" id="input-paraula" placeholder="Introduceix una paraula" aria-label="Introduceix la paraula secreta">
+                <button id="btn-veure-paraula" class="btn-eye" type="button" aria-label="Mostrar o ocultar paraula">👁</button>
+            </div>
+        </div>
+
+        <button id="btn-comencar" class="btn btn-green" aria-label="Començar la partida">Començar partida</button>
+    </header>
+
+    <main id="main-content" role="main">
+        <!-- Banner del títol principal -->
+        <section class="banner-title" aria-label="Secció del títol">
+            <h1 id="main-title">C o m e n ç a r   p a r t i d a</h1>
+        </section>
+
+        <!-- Àrea principal del joc: Estadístiques i Imatge -->
+        <section class="game-area" aria-label="Àrea de joc i puntuació">
+            
+            <!-- Targeta d'estadístiques del jugador -->
+            <aside id="card-jugador" class="stats-card" aria-label="Estadístiques del jugador">
+                <h2 id="nom-jugador" class="stats-header">jugador_33</h2>
+                <div class="stats-body">
+                    <p class="stat-label">PUNTS PARTIDES ACTUALS</p>
+                    <p id="punts-actuals" class="stat-value">0</p>
+                    
+                    <p class="stat-label">TOTAL PARTIDES</p>
+                    <p id="total-partides" class="stat-value">0</p>
+
+                    <p class="stat-label">PARTIDES GUANYADES</p>
+                    <p id="partides-guanyades" class="stat-value">0</p>
+
+                    <p class="stat-label">PARTIDA AMB MÉS PUNTS:</p>
+                    <p id="record-partida" class="stat-value">07/10/2024 15:45 - 10 punts</p>
+                </div>
+            </aside>
+
+            <!-- Marc central amb la imatge (ex. el globus / penjat) -->
+            <figure id="container-imatge" class="image-box">
+                <img id="img-penjat" src="https://i.ibb.co/L8f3qM3/balloon.png" alt="Estat actual de la partida: globus vermell">
+            </figure>
+
+        </section>
+
+        <!-- Teclat virtual inferior amb totes les lletres -->
+        <nav id="teclat-lletres" class="keyboard" aria-label="Teclat de lletres">
+            <button id="btn-a" class="key-btn" aria-label="Lletra A">A</button>
+            <button id="btn-b" class="key-btn" aria-label="Lletra B">B</button>
+            <button id="btn-c" class="key-btn" aria-label="Lletra C">C</button>
+            <button id="btn-d" class="key-btn" aria-label="Lletra D">D</button>
+            <button id="btn-e" class="key-btn" aria-label="Lletra E">E</button>
+            <button id="btn-f" class="key-btn" aria-label="Lletra F">F</button>
+            <button id="btn-g" class="key-btn" aria-label="Lletra G">G</button>
+            <button id="btn-h" class="key-btn" aria-label="Lletra H">H</button>
+            <button id="btn-i" class="key-btn" aria-label="Lletra I">I</button>
+            <button id="btn-j" class="key-btn" aria-label="Lletra J">J</button>
+            <button id="btn-k" class="key-btn" aria-label="Lletra K">K</button>
+            <button id="btn-l" class="key-btn" aria-label="Lletra L">L</button>
+            <button id="btn-m" class="key-btn" aria-label="Lletra M">M</button>
+            <button id="btn-n" class="key-btn" aria-label="Lletra N">N</button>
+            <button id="btn-o" class="key-btn" aria-label="Lletra O">O</button>
+            <button id="btn-p" class="key-btn" aria-label="Lletra P">P</button>
+            <button id="btn-q" class="key-btn" aria-label="Lletra Q">Q</button>
+            <button id="btn-r" class="key-btn" aria-label="Lletra R">R</button>
+            <button id="btn-s" class="key-btn" aria-label="Lletra S">S</button>
+            <button id="btn-t" class="key-btn" aria-label="Lletra T">T</button>
+            <button id="btn-u" class="key-btn" aria-label="Lletra U">U</button>
+            <button id="btn-v" class="key-btn" aria-label="Lletra V">V</button>
+            <button id="btn-w" class="key-btn" aria-label="Lletra W">W</button>
+            <button id="btn-x" class="key-btn" aria-label="Lletra X">X</button>
+            <button id="btn-y" class="key-btn" aria-label="Lletra Y">Y</button>
+            <button id="btn-z" class="key-btn" aria-label="Lletra Z">Z</button>
+        </nav>
+    </main>
+
+</body>
+</html>

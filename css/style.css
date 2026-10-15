@@ -1,0 +1,155 @@
+/* ==========================================================================
+   Configuració General i Reset Bàsic
+   ========================================================================== */
+body {
+    background-color: #f4f8d3; /* Color de fons verd pastel clar */
+    font-family: 'Courier New', Courier, monospace; /* Tipografia estil màquina d'escriure */
+    color: #000000;
+    margin: 0;
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 650px;
+    text-align: center;
+}
+
+/* ==========================================================================
+   Encapçalaments i Textos Formativa
+   ========================================================================== */
+h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+}
+
+h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 35px;
+    margin-bottom: 15px;
+}
+
+/* Nota de camp obligatori */
+.required-note {
+    font-size: 0.85rem;
+    color: #666666;
+    margin-bottom: 15px;
+}
+
+/* ==========================================================================
+   Selecció de Jugadors (Radio Buttons)
+   ========================================================================== */
+.radio-group {
+    border: none;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+}
+
+.radio-group legend {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.radio-group label {
+    margin: 0 15px;
+    cursor: pointer;
+}
+
+.radio-group input[type="radio"] {
+    accent-color: #0075ff;
+}
+
+/* ==========================================================================
+   Secció d'Entrada de Dades i Camps del Jugador
+   ========================================================================== */
+.input-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.help-text {
+    font-size: 0.75rem;
+    color: #555555;
+    margin-bottom: 15px;
+    padding-right: 2px;
+}
+
+/* Files dels camps d'entrada (Jugador 1 i Jugador 2) */
+.input-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    /* Afegim espai entre les files dels jugadors perquè no quedin enganxats */
+    margin-bottom: 15px; 
+}
+
+.input-row label {
+    font-size: 1rem;
+    margin-right: 10px;
+}
+
+.asterisk {
+    color: #d9534f;
+}
+
+.input-row input {
+    font-family: inherit;
+    width: 260px;
+    padding: 6px 10px;
+    border: 1px solid #777;
+    border-radius: 2px;
+    font-size: 0.9rem;
+    box-sizing: border-box;
+}
+
+.input-row input::placeholder {
+    color: #a9a9a9;
+}
+
+/* ==========================================================================
+   Textos Informatius i Estadístiques
+   ========================================================================== */
+.info-text {
+    font-size: 1rem;
+    color: #333333;
+    margin: 10px 0 25px 0;
+}
+
+/* ==========================================================================
+   Grup de Botons Inferiors i Accions
+   ========================================================================== */
+.button-group {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.button-group button {
+    font-family: inherit;
+    background-color: #bdf262; /* Verd brillant del botó */
+    border: 1.5px solid #000;
+    border-radius: 12px;
+    padding: 12px 24px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.button-group button:hover {
+    background-color: #abf041;
+}
+
+.button-group button:active {
+    transform: scale(0.98);
+}
