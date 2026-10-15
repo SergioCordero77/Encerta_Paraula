@@ -97,6 +97,16 @@ h2 {
     margin-right: 10px;
 }
 
+/* Amagar objecte */
+.hide-item {
+  display: none;
+}
+
+/* Mostrar objecte */
+.show-item {
+  display: block;
+}
+
 .asterisk {
     color: #d9534f;
 }
@@ -152,4 +162,35 @@ h2 {
 
 .button-group button:active {
     transform: scale(0.98);
+}
+
+
+/* ==========================================================================
+   Validacions
+   ========================================================================== */
+
+/* Quan el camp és correcte, el mateix espai mostra "✔ Correcte" en verd (classe .ok afegida per JavaScript). */
+.missatge-error.ok {
+  color: #2b8a3e;
+}
+
+/* ESTATS DE VALIDACIÓ
+   Aquí no fem servir :user-invalid / :user-valid: és JavaScript qui decideix quan un camp és correcte o
+   no, i li afegeix les classes .invalid o .valid.
+   - .invalid -> vora gruixuda (2px) vermella. El color sol no és suficient (daltonisme), per això també
+     hi ha el missatge de text i el canvi de gruix.
+   - .valid   -> vora gruixuda verda (el camp s'ha validat i és correcte).
+   El !important és necessari perquè la regla input:not([type="checkbox"]) de dalt és més específica
+   que una simple classe i, sense ell, guanyaria la vora grisa. */
+.invalid {
+  border: 2px solid #c92a2a !important;
+}
+
+.valid {
+  border: 2px solid #2b8a3e !important;
+}
+
+/* El camp invàlid, quan té el focus, manté un contorn visible (més clar, per diferenciar-lo de la vora). */
+.invalid:focus {
+  outline: 3px solid #ffa8a8;
 }

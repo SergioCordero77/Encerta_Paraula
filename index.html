@@ -30,6 +30,7 @@
             <legend>Nombre de jugadors</legend>
 
             <div>
+              <label for="players-1">1 jugador</label>
               <input
                 type="radio"
                 id="players-1"
@@ -37,17 +38,18 @@
                 value="1"
                 checked
               >
-              <label for="players-1">1 jugador</label>
+              <span class="missatge-error" id="error-player1" aria-live="polite"></span>
             </div>
 
             <div>
+              <label for="players-2">2 jugadors</label>
               <input
                 type="radio"
                 id="players-2"
                 name="jugadors"
                 value="2"
               >
-              <label for="players-2">2 jugadors</label>
+              <span class="missatge-error" id="error-player2" aria-live="polite"></span>
             </div>
           </fieldset>
 
@@ -182,9 +184,5 @@
 
         </form>
       </main>
-
-      <!-- Punt d'entrada del codi JavaScript -->
-      <script src="script.js" defer></script>
-
     </body>
   </html>
