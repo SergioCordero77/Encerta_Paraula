@@ -146,7 +146,6 @@ else{
 // Idioma joc
 idioma.textContent = navigator.languages;
 
-
 // Informació del navegador
 navegador.textContent = navigator.userAgent;
 

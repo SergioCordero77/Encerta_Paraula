@@ -67,6 +67,9 @@ h2 {
 /* ==========================================================================
    Secció d'Entrada de Dades i Camps del Jugador
    ========================================================================== */
+/* ==========================================================================
+   Secció d'Entrada de Dades i Camps del Jugador
+   ========================================================================== */
 .input-section {
     display: flex;
     flex-direction: column;
@@ -74,27 +77,62 @@ h2 {
     margin-bottom: 40px;
 }
 
-.help-text {
-    font-size: 0.75rem;
-    color: #555555;
-    margin-bottom: 15px;
-    padding-right: 2px;
-}
-
-/* Files dels camps d'entrada (Jugador 1 i Jugador 2) */
+/* Fila principal que conté la etiqueta i el bloc d'input */
 .input-row {
     display: flex;
-    align-items: center;
+    align-items: center; /* Alinea verticalment la label amb el camp d'entrada */
     justify-content: center;
-    gap: 10px;
+    gap: 15px;
     width: 100%;
-    /* Afegim espai entre les files dels jugadors perquè no quedin enganxats */
-    margin-bottom: 15px; 
+    margin-bottom: 20px; 
 }
 
 .input-row label {
-    font-size: 1rem;
-    margin-right: 10px;
+    font-family: monospace, Courier, monospace; /* Tipografia similar a la imatge */
+    font-size: 0.95rem;
+    color: #333;
+}
+
+/* Contenidor vertical per l'ajuda, l'input i el missatge d'error */
+.input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 280px; /* Ajusta l'amplada segons les teves necessitats */
+}
+
+/* Text d'ajuda superior */
+.help-text {
+    font-family: monospace, Courier, monospace;
+    font-size: 0.75rem;
+    color: #555555;
+    margin: 0 0 4px 0;
+    width: 18.2rem;
+}
+
+/* Estils de l'input */
+.input-row input {
+    font-family: inherit;
+    width: 100%;
+    padding: 6px 10px;
+    border: 1px solid #777;
+    border-radius: 0px;
+    font-size: 0.9rem;
+    box-sizing: border-box;
+    background-color: #fff;
+}
+
+.input-row input::placeholder {
+    color: #a9a9a9;
+}
+
+/* Missatge d'error o d'èxit a sota del camp */
+.missatge-error {
+    font-family: monospace, Courier, monospace;
+    font-size: 0.75rem;
+    margin-top: 4px;
+    display: block;
+    min-height: 1rem; /* Reserva espai vertical per tal que no hi hagi salts visuals */
 }
 
 /* Amagar objecte */
