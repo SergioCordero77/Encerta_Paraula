@@ -26,7 +26,7 @@ const errorJugador2 = document.querySelector("#error-player2");
 
 // Puntuació més alta
 const puntuacioAlta = document.querySelector("#high-score-value");
-let puntuacioMesAlta = 0;
+let puntuacioMesAlta = 10;
 let jugadorMesPuntuacio = "";
 let dataAsoliment = "";
 
@@ -193,12 +193,17 @@ const validarNomPlayer2 = () => {
 }
 
 // Puntuació més alta
-if (puntuacioMesAlta === 0){
-    puntuacioAlta.textContent = "No hi ha puntuació actual";
+const mostrarPuntuacio = () => {
+    if (puntuacioMesAlta === 0){
+        puntuacioAlta.textContent = "No hi ha puntuació actual";
+    }
+    else{
+        puntuacioAlta.textContent = jugadorMesPuntuacio + " - " + puntuacioMesAlta + " - " + dataAsoliment;
+    }
 }
-else{
-    puntuacioAlta.textContent = jugadorMesPuntuacio + " - " + puntuacioMesAlta + " - " + dataAsoliment;
-}
+
+// Mostrar la puntuació més alta
+mostrarPuntuacio();
 
 // Idioma joc
 idioma.textContent = navigator.languages;
@@ -244,6 +249,16 @@ const comencarPartida = (event) => {
     window.location.href = "joc.html";
 }
 
+const esborrarPuntuacio = () => {
+    const confirmacio = confirm("Estàs segur que vols esborrar la informació de la puntuació?");
+
+    if (confirmacio){
+        puntuacioMesAlta = 0;
+        
+        mostrarPuntuacio();
+    }
+}
+
 /* ==========================================================================
    Events
    ========================================================================== */
@@ -263,3 +278,6 @@ inputJugador2.addEventListener("changer", validarNomPlayer2);
 
 // Començar partida
 botoComencar.addEventListener("click", comencarPartida);
+
+// Esborrar puntuació
+botoEsborrar.addEventListener("click", esborrarPuntuacio);
