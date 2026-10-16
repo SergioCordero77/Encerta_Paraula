@@ -38,7 +38,6 @@
                 value="1"
                 checked
               >
-              <span class="missatge-error" id="error-player1" aria-live="polite"></span>
             </div>
 
             <div>
@@ -49,7 +48,6 @@
                 name="jugadors"
                 value="2"
               >
-              <span class="missatge-error" id="error-player2" aria-live="polite"></span>
             </div>
           </fieldset>
 
@@ -83,39 +81,39 @@
                 required
                 aria-required="true"
                 aria-describedby="player-name-help"
-              >
+              >  
             </div>
-
+            <span class="missatge-error" id="error-player1" aria-live="polite"></span>
+            
             <!-- Camp del nom del segon jugador, inicialment ocult -->
-            <div id="player-2-row" class="input-row" hidden>
-              <label for="player2">
-                Nom del jugador 2
-                <span aria-hidden="true">*</span>
-              </label>
+            <span id ="player-2-span" class="hide-item">
+              <div id="player-2-row" class="input-row">
+                <label for="player2">
+                  Nom del jugador 2
+                  <span aria-hidden="true">*</span>
+                </label>
 
-              <input
-                type="text"
-                id="player2"
-                name="player2"
-                placeholder="Exemple: Marc_24"
-                minlength="4"
-                maxlength="14"
-                pattern="[A-Za-zÀ-ÿ0-9_]{4,14}"
-                autocomplete="off"
-                aria-describedby="player-name-help"
-                disabled
-              >
-            </div>
-
+                <input
+                  type="text"
+                  id="player2"
+                  name="player2"
+                  placeholder="Exemple: Marc_24"
+                  minlength="4"
+                  maxlength="14"
+                  pattern="[A-Za-zÀ-ÿ0-9_]{4,14}"
+                  autocomplete="off"
+                  aria-describedby="player-name-help"
+                >
+              </div>
+              <span class="missatge-error" id="error-player2" aria-live="polite"></span>
+            </span>
           </section>
 
           <!-- Secció de puntuació més alta -->
           <section id="high-score-section" aria-labelledby="high-score-title">
             <h2 id="high-score-title">Puntuació més alta</h2>
 
-            <p id="high-score-value" class="info-text">
-              No hi ha puntuació actual
-            </p>
+            <p id="high-score-value" class="info-text"></p>
           </section>
 
           <!-- Secció d'informació del navegador -->
