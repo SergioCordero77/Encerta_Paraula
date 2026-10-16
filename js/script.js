@@ -143,7 +143,7 @@ else{
     puntuacioAlta.textContent = jugadorMesPuntuacio + " - " + puntuacioMesAlta + " - " + dataAsoliment;
 }
 
-
+// 
 
 // URL
 url.textContent = window.location.href;
