@@ -334,7 +334,7 @@ inputJugador2.addEventListener("blur", validarNomPlayer2);
 inputJugador2.addEventListener("changer", validarNomPlayer2);
 
 // Començar partida
-botoComencar.addEventListener("click", comencarPartida);
+form.addEventListener("submit", comencarPartida);
 
 // Esborrar puntuació
 botoEsborrar.addEventListener("click", esborrarPuntuacio);
