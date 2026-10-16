@@ -82,19 +82,47 @@ const validarBotoPlayer2 = () => {
 }
 
 const validarNomPlayer1 = () => {
-    const valorNom = inputJugador1.value;
-    const patro = /[A-Za-zÀ-ÿ0-9_]{4,14}/;
+    const valorNom = inputJugador1.value.trim();
+    const patroNum = /^[A-Za-z0-9_]+$/;
 
-    if (patro.test(valorNom)){
-        errorJugador1.textContent = "Correcte";
-        inputJugador1.classList.add("valid");
-        inputJugador1.classList.remove("invalid");
-        errorJugador1.classList.add("ok");
+    if (valorNom != ""){
+        if (valorNom.length>=4 && valorNom.length<=14){
+            if (patroNum.test(valorNom)){
+                errorJugador1.textContent = "✔ Correcte";
+                inputJugador1.classList.add("valid");
+                inputJugador1.classList.remove("invalid");
+                errorJugador1.classList.add("ok");
 
-        return true;
+                return true;
+            }
+            else{
+                errorJugador1.textContent = "Només es poden introduir lletres sense accents, números i _";
+                inputJugador1.classList.add("invalid");
+                inputJugador1.classList.remove("valid");
+                errorJugador1.classList.remove("ok");
+
+                return false;
+            }     
+        }
+        else if (valorNom.length<4){
+            errorJugador1.textContent = "El nom ha de tenir més de 3 caràcters";
+            inputJugador1.classList.add("invalid");
+            inputJugador1.classList.remove("valid");
+            errorJugador1.classList.remove("ok");
+
+            return false;
+        }
+        else if (valorNom.length>14){
+            errorJugador1.textContent = "El nom ha de tenir menys de 15 caràcters";
+            inputJugador1.classList.add("invalid");
+            inputJugador1.classList.remove("valid");
+            errorJugador1.classList.remove("ok");
+
+            return false;
+        }
     }
     else{
-        errorJugador1.textContent = "Incorrecte";
+        errorJugador1.textContent = "Has d'informar el nom d'un jugador";
         inputJugador1.classList.add("invalid");
         inputJugador1.classList.remove("valid");
         errorJugador1.classList.remove("ok");
@@ -104,29 +132,58 @@ const validarNomPlayer1 = () => {
 }
 
 const validarNomPlayer2 = () => {
-    const valorNomPlayer2 = inputJugador1.value;
-    const valorNomPlayer1 = inputJugador1.value;
-    const patro = /[A-Za-zÀ-ÿ0-9_]{4,14}/;
+    const valorNomPlayer2 = inputJugador2.value.trim();
+    const valorNomPlayer1 = inputJugador1.value.trim();
+    const patroNum = /^[A-Za-z0-9_]+$/;
 
-    if (patro.test(valorNomPlayer2)){
-        if (valorNomPlayer2===valorNomPlayer1){
-            errorJugador2.textContent = "El nom no pot coincidir amb el nom del jugador 1";
+    if (valorNomPlayer2 != ""){
+        if (valorNomPlayer2.length>=4 && valorNomPlayer2.length<=14){
+            if (patroNum.test(valorNomPlayer2)){
+                
+                if(valorNomPlayer2===valorNomPlayer1){
+                    errorJugador2.textContent = "Els dos jugadors han de tenir noms diferents";
+                    inputJugador2.classList.add("invalid");
+                    inputJugador2.classList.remove("valid");
+                    errorJugador2.classList.remove("ok");
+
+                    return false;
+                }
+
+                errorJugador2.textContent = "✔ Correcte";
+                inputJugador2.classList.add("valid");
+                inputJugador2.classList.remove("invalid");
+                errorJugador2.classList.add("ok");
+                
+                return true;
+            }
+            else{
+                errorJugador2.textContent = "Només es poden introduir lletres sense accents, números i _";
+                inputJugador2.classList.add("invalid");
+                inputJugador2.classList.remove("valid");
+                errorJugador2.classList.remove("ok");
+
+                return false;
+            }     
+        }
+        else if (valorNomPlayer2.length<4){
+            errorJugador2.textContent = "El nom ha de tenir més de 3 caràcters";
             inputJugador2.classList.add("invalid");
             inputJugador2.classList.remove("valid");
             errorJugador2.classList.remove("ok");
 
             return false;
         }
+        else if (valorNomPlayer2.length>14){
+            errorJugador2.textContent = "El nom ha de tenir menys de 15 caràcters";
+            inputJugador2.classList.add("invalid");
+            inputJugador2.classList.remove("valid");
+            errorJugador2.classList.remove("ok");
 
-        errorJugador2.textContent = "Correcte";
-        inputJugador2.classList.add("valid");
-        inputJugador2.classList.remove("invalid");
-        errorJugador2.classList.add("ok");
-
-        return true;
+            return false;
+        }
     }
     else{
-        errorJugador2.textContent = "Incorrecte";
+        errorJugador2.textContent = "Has d'informar el nom d'un jugador";
         inputJugador2.classList.add("invalid");
         inputJugador2.classList.remove("valid");
         errorJugador2.classList.remove("ok");
