@@ -1,0 +1,48 @@
+body {
+    background-color: rgb(212, 239, 212);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 20px;
+    color: blue;
+}
+
+ul {
+    list-style-position: inside;
+    max-width: 600px;
+}
+
+li {
+    margin-bottom: 12px;
+}
+
+.boto-tornar {
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(37, 99, 235, 0.25);
+}
+
+.boto-tornar:hover {
+    background-color: #1d4ed8;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(37, 99, 235, 0.35);
+}
+
+.boto-tornar:active {
+    transform: translateY(0);
+}

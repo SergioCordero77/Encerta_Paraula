@@ -4,6 +4,7 @@ document.title = "Nom_Jugador (Guanyades)";
 /* ==========================================================================
    Declaració de variables
    ========================================================================== */
+
 //Botons
 const botoTornar = document.querySelector("#btn-tornar");
 const botoInstruccions = document.querySelector("#btn-instruccions");
@@ -39,6 +40,28 @@ const LLETRES_CA = ['a', 'b', 'c', 'ç', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
    Funcions
    ========================================================================== */
 
+//Tornar a la pàgina principal
+const tornar = () => {
+    const confirmacio = confirm("Estàs segur que vols deixar la partida?");
+
+    if (confirmacio){
+        location.assign("index.html");
+    }
+}
+
+//Popup - Mostrar les instruccions del joc
+const mostrarInstruccions = () => {
+    window.open(
+    "instruccions.html",
+    "instruccions del joc",
+    "popup,width=400,height=400,left=100,top=100"
+);
+}
+
 /* ==========================================================================
    Events
    ========================================================================== */
+
+// Tornar a la pàgina principal
+botoTornar.addEventListener("click", tornar);
+botoInstruccions.addEventListener("click", mostrarInstruccions);
