@@ -26,7 +26,7 @@ const errorJugador2 = document.querySelector("#error-player2");
 
 // Puntuació més alta
 const puntuacioAlta = document.querySelector("#high-score-value");
-let puntuacioMesAlta = 10;
+let puntuacioMesAlta = 0;
 let jugadorMesPuntuacio = "";
 let dataAsoliment = "";
 
@@ -42,6 +42,14 @@ const url = document.querySelector("#url-value");
 // Botons
 const botoComencar = document.querySelector("#start-game-button");
 const botoEsborrar = document.querySelector("#clear-score-button");
+
+// Objecte navegador
+const navegadorWeb = {
+    idioma: navigator.language,
+    nom: ["Chrome", "Firefox", "Safari", "Edge", "Altres"],
+    url: window.location.href,
+    color: ""
+};
 
 /* ==========================================================================
    Funcions
@@ -206,13 +214,62 @@ const mostrarPuntuacio = () => {
 mostrarPuntuacio();
 
 // Idioma joc
-idioma.textContent = navigator.languages;
+const mostrarIdioma = () => {
+    idioma.textContent = navegadorWeb.idioma;
+}
+
+// Mostrar idioma
+mostrarIdioma();
 
 // Informació del navegador
-navegador.textContent = navigator.userAgent;
+const mostrarInfoNavegador = () => {
+    const arrayNoms = navegadorWeb.nom;
+    const infoNav = navigator.userAgent;
+
+    if (infoNav.includes("Firefox")){
+        navegador.textContent = arrayNoms[1]; //Firefox
+        document.body.classList.add("firefox-color");
+        
+        navegadorWeb.color = "firefox-color";
+    }
+    else if (infoNav.includes("Chrome") && infoNav.includes("Safari") && !infoNav.includes("Edg")){
+        navegador.textContent = arrayNoms[0]; //Chrome
+        document.body.classList.add("chrome-color");
+
+        navegadorWeb.color = "chrome-color";
+    }
+    else if (infoNav.includes("Chrome") && infoNav.includes("Safari") && infoNav.includes("Edg")){
+        navegador.textContent = arrayNoms[3]; //Edge
+        document.body.classList.add("edge-color");
+
+        navegadorWeb.color = "edge-color";
+    }
+    else if (infoNav.includes("Safari") && infoNav.includes("Chrome")){
+        navegador.textContent = arrayNoms[2]; //Safari
+        document.body.classList.add("safari-color");
+
+        navegadorWeb.color = "safari-color";
+    }
+    else{
+        navegador.textContent = arrayNoms[4]; //Altres
+        document.body.classList.add("altres-color");
+
+        navegadorWeb.color = "altres-color";
+    }
+}
+
+// Mostrar informació del navegador
+mostrarInfoNavegador();
+
+console.log(navegadorWeb);
 
 // URL
-url.textContent = window.location.href;
+const mostrarUrl = () => {
+    url.textContent = navegadorWeb.url;
+}
+
+// Mostrar URL
+mostrarUrl();
 
 // Començar partida
 const comencarPartida = (event) => {
@@ -246,7 +303,7 @@ const comencarPartida = (event) => {
 
     form.reset();
 
-    window.location.href = "joc.html";
+    window.location.assign("joc.html");
 }
 
 const esborrarPuntuacio = () => {
