@@ -17,6 +17,27 @@ body {
     color: #000;
 }
 
+/* Background-color diferents segons el navegador */
+.firefox-color{
+    background-color: #f4f8d3;
+}
+
+.chrome-color{
+    background-color: #7ae474;
+}
+
+.safari-color{
+    background-color: #a3d5ee;
+}
+
+.edge-color{
+    background-color: #9898e8;
+}
+
+.altres-color{
+    background-color: #eea291;
+}
+
 /* ==========================================================================
    Barra Superior (Header / Menu)
    ========================================================================== */
