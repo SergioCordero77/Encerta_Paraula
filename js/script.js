@@ -143,7 +143,12 @@ else{
     puntuacioAlta.textContent = jugadorMesPuntuacio + " - " + puntuacioMesAlta + " - " + dataAsoliment;
 }
 
-// 
+// Idioma joc
+idioma.textContent = navigator.languages;
+
+
+// Informació del navegador
+navegador.textContent = navigator.userAgent;
 
 // URL
 url.textContent = window.location.href;
