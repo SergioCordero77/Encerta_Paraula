@@ -209,6 +209,41 @@ navegador.textContent = navigator.userAgent;
 // URL
 url.textContent = window.location.href;
 
+// Començar partida
+const comencarPartida = (event) => {
+    event.preventDefault();
+
+    const botoJugador1Ok = validarBotoPlayer1();
+    const botoJugador2Ok = validarBotoPlayer2();
+    const nomJugador1Ok = validarNomPlayer1();
+    const nomJugador2Ok = validarNomPlayer2();
+
+    if(!botoJugador1Ok && !botoJugador2Ok){
+        botoJugador1.focus();
+        return;
+    }
+    else if(botoJugador1Ok){
+        if(!nomJugador1Ok){
+            inputJugador1.focus();
+            return;
+        }
+    }
+    else if(botoJugador2Ok){
+        if(!nomJugador1Ok){
+            inputJugador1.focus();
+            return;
+        }
+        else if(!nomJugador2Ok){
+            inputJugador2.focus();
+            return;
+        }
+    }
+
+    form.reset();
+
+    window.location.href = "joc.html";
+}
+
 /* ==========================================================================
    Events
    ========================================================================== */
@@ -225,3 +260,6 @@ inputJugador1.addEventListener("changer", validarNomPlayer1);
 // Validació del jugador 2
 inputJugador2.addEventListener("blur", validarNomPlayer2);
 inputJugador2.addEventListener("changer", validarNomPlayer2);
+
+// Començar partida
+botoComencar.addEventListener("click", comencarPartida);
