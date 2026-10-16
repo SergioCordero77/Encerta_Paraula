@@ -27,6 +27,8 @@ const errorJugador2 = document.querySelector("#error-player2");
 // Puntuació més alta
 const puntuacioAlta = document.querySelector("#high-score-value");
 let puntuacioMesAlta = 0;
+let jugadorMesPuntuacio = "";
+let dataAsoliment = "";
 
 // Navegador
 const navegador = document.querySelector("#browser-value");
@@ -138,9 +140,13 @@ if (puntuacioMesAlta === 0){
     puntuacioAlta.textContent = "No hi ha puntuació actual";
 }
 else{
-    puntuacioAlta.textContent = "La puntuació més alta es de " + puntuacioMesAlta;
+    puntuacioAlta.textContent = jugadorMesPuntuacio + " - " + puntuacioMesAlta + " - " + dataAsoliment;
 }
 
+
+
+// URL
+url.textContent = window.location.href;
 
 /* ==========================================================================
    Events
