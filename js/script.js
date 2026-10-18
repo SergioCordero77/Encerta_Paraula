@@ -14,7 +14,7 @@ const divJugador1 = document.querySelector("#player-1-row");
 const divJugador2 = document.querySelector("#player-2-row");
 
 // Span jugador 2
-const spanJugador2 = document.querySelector("#player-2-span");
+const spanJugador2 = document.querySelector("#player-2-div");
 
 // Jugadors (input)
 const inputJugador1 = document.querySelector("#player1");

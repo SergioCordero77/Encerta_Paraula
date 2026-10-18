@@ -23,6 +23,9 @@ const botoVeureParaula = document.querySelector("#btn-veure-paraula");
 //Titol principal
 const titol = document.querySelector("#main-title");
 
+//Imatge de globus
+const imatgeGlobus = document.querySelector("#img-globus");
+
 /* ---Tarjeta d'estadístiques del jugador--- */
 const nomJugador = document.querySelector("#nom-jugador");
 const puntsActuals = document.querySelector("#punts-actuals");
@@ -190,6 +193,28 @@ const crearTeclat = () => {
 //Crida de la funció per crear el teclat;
 crearTeclat();
 
+
+
+//Verificar si la lletra existeix
+const verificarLletra = (event) => {
+    const valorParaula = inputParaula.value.toUpperCase();
+    let paraulaOculta = titol.textContent;
+    let contErrors = 0;
+     
+    for(let i = 0; i<valorParaula.length; i++){
+        let lletraParaula = valorParaula.charAt(i);
+        const lletraTeclat = event.currentTarget.textContent;
+        
+        if(lletraParaula===lletraTeclat){
+            paraulaOculta.charAt(i) = " " + lletraTeclat + " ";
+        }
+        else{
+            imatgeGlobus.src = "img/img_globus/img_" + contErrors++ + ".png";
+        }
+    }
+}
+
+
 /* ==========================================================================
    Events
    ========================================================================== */
@@ -206,3 +231,6 @@ botoVeureParaula.addEventListener("click", mostrarParaula);
 //Començar partida
 botoComencarPartida.addEventListener("click", comencarPartida);
 botoTancarDialeg.addEventListener("click", tancarDialeg);
+
+//Verificar paraula
+botoLletra.addEventListener("click", verificarLletra);
