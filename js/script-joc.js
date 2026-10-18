@@ -12,6 +12,7 @@ const botoComencarPartida = document.querySelector("#btn-comencar");
 
 //Idioma
 const idioma = document.querySelector("#idioma");
+const idiomaProva = "CA";
 
 //Paraula a endevinar
 const inputParaula = document.querySelector("#input-paraula");
@@ -35,7 +36,9 @@ let partides = 0;
 let guanyades = 0;
 let record = 0;
 
-//Lletres
+//Teclat lletres
+const teclat = document.querySelector("#teclat-lletres");
+
 const LLETRES_EN = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
 const LLETRES_ESP = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'ñ', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
@@ -143,6 +146,49 @@ const comencarPartida = () => {
 const tancarDialeg = () => {
     dialegError.close();
 }
+
+//Teclat
+const crearTeclat = () => {
+    if(idiomaProva==="EN"){
+        for(let i = 0; i<LLETRES_EN.length; i++){
+            const lletra = document.createElement("button"); //creació de l'element botó
+            lletra.textContent = LLETRES_EN[i].toUpperCase();
+            lletra.id = "btn-" + LLETRES_EN[i];
+            lletra.classList.add ("key-btn");
+            lletra.setAttribute("aria-label", "Lletra " + LLETRES_EN[i]);
+
+            teclat.appendChild(lletra); //Afegim al contenidor del tecla
+        }
+    }
+    else if(idiomaProva==="ESP"){
+        for(let i = 0; i<LLETRES_ESP.length; i++){
+            const lletra = document.createElement("button"); //creació de l'element botó
+            lletra.textContent = LLETRES_ESP[i].toUpperCase();
+            lletra.id = "btn-" + LLETRES_ESP[i];
+            lletra.classList.add ("key-btn");
+            lletra.setAttribute("aria-label", "Lletra " + LLETRES_ESP[i]);
+
+            teclat.appendChild(lletra); //Afegim al contenidor del tecla
+        }
+    }
+    else if(idiomaProva==="CA"){
+        for(let i = 0; i<LLETRES_CA.length; i++){
+            const lletra = document.createElement("button"); //creació de l'element botó
+            lletra.textContent = LLETRES_CA[i].toUpperCase();
+            lletra.id = "btn-" + LLETRES_CA[i];
+            lletra.classList.add ("key-btn");
+            lletra.setAttribute("aria-label", "Lletra " + LLETRES_CA[i]);
+
+            teclat.appendChild(lletra); //Afegim al contenidor del tecla
+        }
+    }
+    
+    console.log ("S'ha creat amb éxit el teclat " + idiomaProva);
+
+}
+
+//Crida de la funció per crear el teclat;
+crearTeclat();
 
 /* ==========================================================================
    Events
