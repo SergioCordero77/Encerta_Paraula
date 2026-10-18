@@ -15,10 +15,10 @@
         <button id="btn-instruccions" class="btn btn-green" aria-label="Mostrar instruccions del joc">Instruccions</button>
         
         <div class="input-container">
-            <label for="input-paraula" class="label-idioma">Idioma (ca)</label>
+            <label for="input-paraula" id="idioma" class="label-idioma">Idioma (ca)</label>
             <div class="input-wrapper">
                 <input type="password" id="input-paraula" placeholder="Introduceix una paraula" aria-label="Introduceix la paraula secreta">
-                <button id="btn-veure-paraula" class="btn-eye" type="button" aria-label="Mostrar o ocultar paraula">👁</button>
+                <button id="btn-veure-paraula" class="btn-eye" type="button" aria-label="Mostrar o ocultar paraula">👁️</button>
             </div>
         </div>
 
@@ -28,7 +28,7 @@
     <main id="main-content" role="main">
         <!-- Banner del títol principal -->
         <section class="banner-title" aria-label="Secció del títol">
-            <h1 id="main-title">C o m e n ç a r   p a r t i d a</h1>
+            <h1 id="main-title">C o m e n ç a r    p a r t i d a</h1>
         </section>
 
         <!-- Àrea principal del joc: Estadístiques i Imatge -->
@@ -88,6 +88,11 @@
             <button id="btn-y" class="key-btn" aria-label="Lletra Y">Y</button>
             <button id="btn-z" class="key-btn" aria-label="Lletra Z">Z</button>
         </nav>
+
+        <dialog id="dialeg-error" class="dialeg-error">
+            <p id="missatge-error"></p>
+            <button id="btn-tancar-error" type="button">Tancar</button>
+        </dialog>
     </main>
 
 </body>
