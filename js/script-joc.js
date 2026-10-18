@@ -16,6 +16,7 @@ const idiomaProva = "CA";
 
 //Paraula a endevinar
 const inputParaula = document.querySelector("#input-paraula");
+let paraulaAEndevinar = "";
 
 //Botó veure paraula
 const botoVeureParaula = document.querySelector("#btn-veure-paraula");
@@ -139,6 +140,7 @@ const comencarPartida = () => {
     }
 
     //Dashabilitar botó i input
+    paraulaAEndevinar = inputParaula.value;
     inputParaula.value = "";
     botoComencarPartida.disabled = true;
     inputParaula.disabled = true;
@@ -150,6 +152,43 @@ const tancarDialeg = () => {
     dialegError.close();
 }
 
+//Verificar lletra
+const verificarLletra = (event) => {
+    const valorParaula = paraulaAEndevinar.toUpperCase();
+    let paraulaOculta = titol.textContent;
+    let cadenaNova = "";
+    let contErrors = 0;
+    let lletraEncertada = false;
+            
+    for(let i = 0; i<valorParaula.length; i++){
+        let lletraParaula = valorParaula.charAt(i);
+        const lletraTeclat = event.currentTarget.textContent;
+
+        if(lletraParaula===lletraTeclat){
+            for(let j=0; j<valorParaula.length; j++){
+
+                if (valorParaula.charAt(j)===lletraTeclat){
+                    cadenaNova += " " + lletraTeclat + " ";
+                }
+                else{
+                    cadenaNova += " _ ";
+                }
+
+            }
+            titol.textContent = cadenaNova;
+            lletraEncertada = true;
+        }
+    }
+
+    if(!lletraEncertada){
+        imatgeGlobus.src = "img/img_globus/img_" + contErrors++ + ".png";
+        event.currentTarget.disabled = true;
+        return;
+    }
+
+    event.currentTarget.disabled = true;
+}
+
 //Teclat
 const crearTeclat = () => {
     if(idiomaProva==="EN"){
@@ -159,6 +198,7 @@ const crearTeclat = () => {
             lletra.id = "btn-" + LLETRES_EN[i];
             lletra.classList.add ("key-btn");
             lletra.setAttribute("aria-label", "Lletra " + LLETRES_EN[i]);
+            lletra.addEventListener("click", verificarLletra);
 
             teclat.appendChild(lletra); //Afegim al contenidor del tecla
         }
@@ -170,6 +210,7 @@ const crearTeclat = () => {
             lletra.id = "btn-" + LLETRES_ESP[i];
             lletra.classList.add ("key-btn");
             lletra.setAttribute("aria-label", "Lletra " + LLETRES_ESP[i]);
+            lletra.addEventListener("click", verificarLletra);
 
             teclat.appendChild(lletra); //Afegim al contenidor del tecla
         }
@@ -181,38 +222,17 @@ const crearTeclat = () => {
             lletra.id = "btn-" + LLETRES_CA[i];
             lletra.classList.add ("key-btn");
             lletra.setAttribute("aria-label", "Lletra " + LLETRES_CA[i]);
+            lletra.addEventListener("click", verificarLletra);
 
             teclat.appendChild(lletra); //Afegim al contenidor del tecla
         }
     }
     
-    console.log ("S'ha creat amb éxit el teclat " + idiomaProva);
-
+    //Si arribem aquí, el teclat s'ha creat correctament
 }
 
 //Crida de la funció per crear el teclat;
 crearTeclat();
-
-
-
-//Verificar si la lletra existeix
-const verificarLletra = (event) => {
-    const valorParaula = inputParaula.value.toUpperCase();
-    let paraulaOculta = titol.textContent;
-    let contErrors = 0;
-     
-    for(let i = 0; i<valorParaula.length; i++){
-        let lletraParaula = valorParaula.charAt(i);
-        const lletraTeclat = event.currentTarget.textContent;
-        
-        if(lletraParaula===lletraTeclat){
-            paraulaOculta.charAt(i) = " " + lletraTeclat + " ";
-        }
-        else{
-            imatgeGlobus.src = "img/img_globus/img_" + contErrors++ + ".png";
-        }
-    }
-}
 
 
 /* ==========================================================================
@@ -231,6 +251,3 @@ botoVeureParaula.addEventListener("click", mostrarParaula);
 //Començar partida
 botoComencarPartida.addEventListener("click", comencarPartida);
 botoTancarDialeg.addEventListener("click", tancarDialeg);
-
-//Verificar paraula
-botoLletra.addEventListener("click", verificarLletra);
