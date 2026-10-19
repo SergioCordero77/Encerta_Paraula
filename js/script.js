@@ -18,7 +18,9 @@ const spanJugador2 = document.querySelector("#player-2-div");
 
 // Jugadors (input)
 const inputJugador1 = document.querySelector("#player1");
+let nomJugador1 = "";   //Per guardar el nom del jugador1
 const inputJugador2 = document.querySelector("#player2");
+let nomJugador2 = "";   //Per guardar el nom del jugador2
 
 // Missatges d'error dels jugadors
 const errorJugador1 = document.querySelector("#error-player1");
@@ -101,6 +103,8 @@ const validarNomPlayer1 = () => {
                 inputJugador1.classList.remove("invalid");
                 errorJugador1.classList.add("ok");
 
+                nomJugador1 = valorNom; //Guardem el nom del jugador
+
                 return true;
             }
             else{
@@ -161,6 +165,8 @@ const validarNomPlayer2 = () => {
                 inputJugador2.classList.add("valid");
                 inputJugador2.classList.remove("invalid");
                 errorJugador2.classList.add("ok");
+                
+                nomJugador2 = valorNom; //Guardem el nom del jugador
                 
                 return true;
             }
@@ -300,6 +306,23 @@ const comencarPartida = (event) => {
             return;
         }
     }
+
+    /* ==========================================================================
+   Guardar informació abans de començar el joc
+   ========================================================================== */
+
+    /* ---SESSIONSTORAGE--- */
+    // Guardem l'objecte navegadorWeb amb la info del navegador
+    sessionStorage.setItem("navegadorWeb", JSON.stringify(navegadorWeb));
+
+    /* ---COOKIE--- */
+    // Guardem el nom dels jugadors
+    document.cookie = "jugador1=" + encodeURIComponent(nomJugador1);
+    document.cookie = "jugador2=" + encodeURIComponent(nomJugador2);
+    
+    /* ---LOCALSTORAGE--- */
+    //Guardem la puntuació més alta
+    localStorage.setItem("puntuacioMesAlta", puntuacioMesAlta);
 
     form.reset();
 

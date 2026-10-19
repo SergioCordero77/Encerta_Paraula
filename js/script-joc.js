@@ -59,9 +59,32 @@ const botoTancarDialeg = document.querySelector("#btn-tancar-error");
 //Títol de la pestanya
 document.title = "Nom_Jugador (" + guanyades + ")";
 
+/* ---RECUPERACIÓ D'INFORMACIÓ--- */
+let puntuacioMesAlta = Number(localStorage.getItem("puntuacioMesAlta"));
+
+const navegadorWeb = JSON.parse(sessionStorage.getItem("navegadorWeb"));
+
+const jugador1 = llegirCookie("jugador1");
+
+function llegirCookie(nom) {
+    const cookies = document.cookie.split("; ");     // ["idioma=ca", "tema=fosc"]
+
+    for (const cookie of cookies) {
+        const [clau, valor] = cookie.split("=");
+        if (clau === nom) {
+            return decodeURIComponent(valor);
+        }
+    }
+    return null;
+}
+
 /* ==========================================================================
    Funcions
    ========================================================================== */
+
+console.log("El nom del jugador1 és: " + jugador1);
+console.log(puntuacioMesAlta);
+console.log(navegadorWeb);
 
 /* ---TORNAR--- */
 //Tornar a la pàgina principal
