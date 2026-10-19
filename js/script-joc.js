@@ -305,6 +305,16 @@ const verificarLletra = (event) => {
         //Derrota
         // Si el comptador arriva a 9, es perd la partida
         if (contErrors===9){
+            if(punts>record){
+                record=punts;
+                dataRecord= new Date();
+                
+                /* ---Guardem informació al LOCALSTORAGE--- */
+                localStorage.setItem("nomJugador1", nomJugador1);
+                localStorage.setItem("record", record);
+                localStorage.setItem("dataRecord", dataRecord);
+            }
+
             perdrePartida();
         }
 
@@ -331,6 +341,11 @@ const verificarLletra = (event) => {
     //Victoria
     //Si a la paraula oculta no hi ha '_' vol dir que ja s'ha encertat la paraula
     if (!paraulaOculta.includes("_")){
+        if(punts>record){
+            record=punts;
+            dataRecord= new Date();
+        }
+        
         guanyarPartida();
     }
 }

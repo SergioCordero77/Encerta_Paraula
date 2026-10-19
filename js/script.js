@@ -53,6 +53,11 @@ const navegadorWeb = {
     color: ""
 };
 
+/* ---RECUPERACIÓ D'INFORMACIÓ--- */
+let nomJugadorRecord = localStorage.getItem("numJugador1");
+let record = localStorage.getItem("record");
+let dataRecord = localStorage.getItem("dataRecord");
+
 /* ==========================================================================
    Funcions
    ========================================================================== */
