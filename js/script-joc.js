@@ -40,6 +40,7 @@ let punts = 0;
 let partides = 0;
 let guanyades = 0;
 let record = 0;
+let ratxa = 0;
 
 //Teclat lletres
 const teclat = document.querySelector("#teclat-lletres");
@@ -172,7 +173,9 @@ const tancarDialeg = () => {
     dialegError.close();
 }
 
-/* ---JUGAR--- */
+/* --------------------- */
+
+/* ---LÒGICA DE GUANYA I PERDRE--- */
 
 //Guanyar la partida 
 const guanyarPartida = () => {
@@ -200,13 +203,33 @@ const perdrePartida = () => {
     inputParaula.placeholder="Introduceix una paraula";
 }
 
+/* --------------------- */
+
+/* ---LÓGICA DE PUNTS--- */
+const puntsPerLletraEncertada = (vegades) => {
+    ratxa++;                     //Augmentem +1 la ratxa cada vegada que s'encerta una lletra
+
+    punts += vegades*ratxa;
+}
+
+const puntsPerLletraFallada = () => {
+    ratxa = 0;                  //Reiniciem la ratxa
+    
+    if(punts>0){
+        punts--;
+    }
+}
+
+/* --------------------- */
+
 //Verificar lletra
 const verificarLletra = (event) => {
     const valorParaula = paraulaAEndevinar.toUpperCase(); // Passem la paraula a majúscula per poder comparar amb les lletres majúscules
     let cadenaNova = "";                                  // Construim el nou String
     let lletraEncertada = false;                          // Controlar si s'encerta la lletra
     const lletraTeclat = event.currentTarget.textContent; // Lletra del botó        
-    
+    let vegadesTrobada = 0;                               // Comptador per saber quantes vegades s'ha trobat una lletra
+
     for(let i = 0; i<valorParaula.length; i++){
         let lletraParaula = valorParaula.charAt(i);             // Lletra de la paraula a endevinar    
         let lletraParaulaOculta = paraulaOculta.charAt(i);      // LLetra de la paraula oculta (inicialment només són '_')
@@ -222,6 +245,8 @@ const verificarLletra = (event) => {
         if(lletraParaula===lletraTeclat){
             cadenaNova += lletraTeclat;
 
+            vegadesTrobada++;
+
             lletraEncertada = true;
         }
         else{
@@ -229,8 +254,13 @@ const verificarLletra = (event) => {
         }
     }
     
-    // Si no s'ha encertat la lletra, actualitzem les imatges
+    // Si no s'ha encertat la lletra
     if(!lletraEncertada){
+        puntsPerLletraFallada();
+
+        console.log(punts);
+
+        // Actualitzem les imatges
         imatgeGlobus.src = "img/img_globus/img_" + ++contErrors + ".png";
         event.currentTarget.disabled = true;    //Deshabilitem el botó de la lletra clickada
         
@@ -242,7 +272,14 @@ const verificarLletra = (event) => {
 
         return;
     }
+    else{
+        puntsPerLletraEncertada(vegadesTrobada);
+
+        console.log(punts); 
+    }
     
+    
+
     // Actualizem la paraula oculta
     // Per exemple, la paraula es 'casa' i s'ha clickat la 'a'
     // Paraula oculta serà '_a_a'
