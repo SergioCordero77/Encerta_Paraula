@@ -124,6 +124,20 @@ body {
     letter-spacing: 2px;
 }
 
+.banner-title-win {
+    background-color: #0ef161; /* Verd del títol */
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+}
+
+.banner-title-lose {
+    background-color: #d73222; /* Vermell del títol */
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+}
+
 /* ==========================================================================
    Àrea Principal de Joc (Estadístiques + Imatge)
    ========================================================================== */

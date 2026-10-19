@@ -1,6 +1,3 @@
-//Canviar la pestanya
-document.title = "Nom_Jugador (Guanyades)";
-
 /* ==========================================================================
    Declaració de variables
    ========================================================================== */
@@ -23,6 +20,7 @@ let paraulaOculta = "";     //Guardarem la paraula transformada en oculta '_ _ _
 const botoVeureParaula = document.querySelector("#btn-veure-paraula");
 
 //Titol principal
+const bannerTitle = document.querySelector("#banner-main-title");
 const titol = document.querySelector("#main-title");
 
 //Imatge de globus
@@ -56,6 +54,9 @@ const LLETRES_CA = ['a', 'b', 'c', 'ç', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
 const dialegError = document.querySelector("#dialeg-error");
 const missatgeError = document.querySelector("#missatge-error");
 const botoTancarDialeg = document.querySelector("#btn-tancar-error");
+
+//Títol de la pestanya
+document.title = "Nom_Jugador (" + guanyades + ")";
 
 /* ==========================================================================
    Funcions
@@ -171,6 +172,34 @@ const tancarDialeg = () => {
     dialegError.close();
 }
 
+/* ---JUGAR--- */
+
+//Guanyar la partida 
+const guanyarPartida = () => {
+    partides++;
+    guanyades++;
+    bannerTitle.classList.add("banner-title-win");
+
+    //Tornem a habilita el input de la paraula i el botó començar
+    botoComencarPartida.disabled = false;
+    inputParaula.disabled = false;
+    inputParaula.placeholder="Introduceix una paraula";
+
+    //Actualitzem el títol / pestaña
+    document.title = "Nom_Jugador (" + guanyades + ")";
+}
+
+//Perdre la partida
+const perdrePartida = () => {
+    partides++;
+    bannerTitle.classList.add("banner-title-lose");
+
+    //Tornem a habilita el input de la paraula i el botó començar
+    botoComencarPartida.disabled = false;
+    inputParaula.disabled = false;
+    inputParaula.placeholder="Introduceix una paraula";
+}
+
 //Verificar lletra
 const verificarLletra = (event) => {
     const valorParaula = paraulaAEndevinar.toUpperCase(); // Passem la paraula a majúscula per poder comparar amb les lletres majúscules
@@ -208,7 +237,7 @@ const verificarLletra = (event) => {
         //Derrota
         // Si el comptador arriva a 9, es perd la partida
         if (contErrors===9){
-            partides++;
+            perdrePartida();
         }
 
         return;
@@ -227,8 +256,7 @@ const verificarLletra = (event) => {
     //Victoria
     //Si a la paraula oculta no hi ha '_' vol dir que ja s'ha encertat la paraula
     if (!paraulaOculta.includes("_")){
-        partides++;
-        partidesGuanyades++;
+        guanyarPartida();
     }
 }
 
