@@ -62,6 +62,7 @@ let dataRecord = localStorage.getItem("dataRecord");
    Funcions
    ========================================================================== */
 
+/* ---VALIDAR BOTONS--- */
 const validarBotoPlayer1 = () => {
     if (botoJugador1.checked){
         spanJugador2.classList.add("hide-item");
@@ -96,6 +97,7 @@ const validarBotoPlayer2 = () => {
     }
 }
 
+/* ---VALIDAR INPUTS DELS JUGADORS--- */
 const validarNomPlayer1 = () => {
     const valorNom = inputJugador1.value.trim();
     const patroNum = /^[A-Za-z0-9_]+$/;
@@ -217,7 +219,7 @@ const mostrarPuntuacio = () => {
         puntuacioAlta.textContent = "No hi ha puntuació actual";
     }
     else{
-        puntuacioAlta.textContent = jugadorMesPuntuacio + " - " + puntuacioMesAlta + " - " + dataAsoliment;
+        puntuacioAlta.textContent = nomJugadorRecord + " - " + record + " - " + dataRecord;
     }
 }
 
@@ -334,12 +336,15 @@ const comencarPartida = (event) => {
     window.location.assign("joc.html");
 }
 
+
 const esborrarPuntuacio = () => {
     const confirmacio = confirm("Estàs segur que vols esborrar la informació de la puntuació?");
 
     if (confirmacio){
-        puntuacioMesAlta = 0;
-        
+        localStorage.removeItem("numJugador");
+        localStorage.removeItem("record");
+        localStorage.removeItem("dataRecord");
+    
         mostrarPuntuacio();
     }
 }

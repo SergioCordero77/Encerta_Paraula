@@ -30,7 +30,7 @@ const imatgeGlobus = document.querySelector("#img-globus");
 const nomJugador = document.querySelector("#nom-jugador");
 const puntsActuals = document.querySelector("#punts-actuals");
 const totalPartides = document.querySelector("#total-partides");
-const partidesGuanyades = document.querySelector("#partides_guanyades");
+const partidesGuanyades = document.querySelector("#partides-guanyades");
 const recordActual = document.querySelector("#record-partida");
 
 //variables de partida
@@ -131,10 +131,16 @@ const mostrarParaula = () => {
 
 const mostrarTargetaJugador1 = () => {
     nomJugador.textContent = nomJugador1;
-    puntsActuals = punts;
-    totalPartides = partides;
-    partidesGuanyades = guanyades;
-    recordActual.textContent = dataRecord + " - " + record; 
+    puntsActuals.textContent = punts;
+    totalPartides.textContent = partides;
+    partidesGuanyades.textContent = guanyades;
+
+    if (record===0){
+        recordActual.textContent = "Encara no establert"
+    }
+    else{
+        recordActual.textContent = dataRecord + " - " + record; 
+    }
 }
 
 mostrarTargetaJugador1();
@@ -198,12 +204,29 @@ const comencarPartida = () => {
 
     mostrarTitol(titolAMostrar);    // Crida a la funció per mostrar bé el títol
 
+    //Reiniciem la clase inicial
+    bannerTitle.classList.add("banner-title");
+    bannerTitle.classList.remove("banner-title-win");
+    bannerTitle.classList.remove("banner-title-lose");
+
+    //Reiniciem puntuació
+    punts = 0;
+
     //Dashabilitar botó i input
     paraulaAEndevinar = inputParaula.value; //Guardem la paraula en una variable
     inputParaula.value = "";
     botoComencarPartida.disabled = true;
     inputParaula.disabled = true;
     inputParaula.placeholder="Deshabilitat";
+    
+    //Buidem el teclat antic
+    buidarTeclat();
+
+    //Creem el teclat nou amb tots els botons habilitat
+    crearTeclat();
+
+    //Mostrem la tarjeta amb la informació actualitzada
+    mostrarTargetaJugador1();
 }
 
 //Tancar diàleg
@@ -217,6 +240,16 @@ const tancarDialeg = () => {
 
 //Guanyar la partida 
 const guanyarPartida = () => {
+    if(punts>record){
+        record=punts;
+        dataRecord= new Date();
+
+        /* ---Guardem informació al LOCALSTORAGE--- */
+        localStorage.setItem("nomJugador1", nomJugador1);
+        localStorage.setItem("record", record);
+        localStorage.setItem("dataRecord", dataRecord);
+    }
+    
     partides++;
     guanyades++;
     bannerTitle.classList.add("banner-title-win");
@@ -228,10 +261,27 @@ const guanyarPartida = () => {
 
     //Actualitzem el títol / pestaña
     document.title = "Nom_Jugador (" + guanyades + ")";
+
+    //Mostrem la tarjeta amb la informació actualitzada
+    mostrarTargetaJugador1();
+
+    //Reiniciem puntuació i ratxa
+    punts = 0;
+    ratxa = 0;
 }
 
 //Perdre la partida
 const perdrePartida = () => {
+    if(punts>record){
+        record=punts;
+        dataRecord= new Date();
+        
+        /* ---Guardem informació al LOCALSTORAGE--- */
+        localStorage.setItem("nomJugador1", nomJugador1);
+        localStorage.setItem("record", record);
+        localStorage.setItem("dataRecord", dataRecord);
+    }
+    
     partides++;
     bannerTitle.classList.add("banner-title-lose");
 
@@ -239,6 +289,13 @@ const perdrePartida = () => {
     botoComencarPartida.disabled = false;
     inputParaula.disabled = false;
     inputParaula.placeholder="Introduceix una paraula";
+
+    //Mostrem la tarjeta amb la informació actualitzada
+    mostrarTargetaJugador1();
+
+    //Reiniciem puntuació i ratxa
+    punts = 0;
+    ratxa = 0;
 }
 
 /* --------------------- */
@@ -305,28 +362,21 @@ const verificarLletra = (event) => {
         //Derrota
         // Si el comptador arriva a 9, es perd la partida
         if (contErrors===9){
-            if(punts>record){
-                record=punts;
-                dataRecord= new Date();
-                
-                /* ---Guardem informació al LOCALSTORAGE--- */
-                localStorage.setItem("nomJugador1", nomJugador1);
-                localStorage.setItem("record", record);
-                localStorage.setItem("dataRecord", dataRecord);
-            }
-
             perdrePartida();
         }
+
+        //Mostrem la tarjeta amb la informació actualitzada
+        mostrarTargetaJugador1();
 
         return;
     }
     else{
         puntsPerLletraEncertada(vegadesTrobada);
-
         console.log(punts); 
+
+        //Mostrem la tarjeta amb la informació actualitzada
+        mostrarTargetaJugador1();
     }
-    
-    
 
     // Actualizem la paraula oculta
     // Per exemple, la paraula es 'casa' i s'ha clickat la 'a'
@@ -341,11 +391,6 @@ const verificarLletra = (event) => {
     //Victoria
     //Si a la paraula oculta no hi ha '_' vol dir que ja s'ha encertat la paraula
     if (!paraulaOculta.includes("_")){
-        if(punts>record){
-            record=punts;
-            dataRecord= new Date();
-        }
-        
         guanyarPartida();
     }
 }
@@ -360,6 +405,8 @@ const crearTeclat = () => {
             lletra.classList.add ("key-btn");
             lletra.setAttribute("aria-label", "Lletra " + LLETRES_EN[i]);
             lletra.addEventListener("click", verificarLletra);
+            
+            lletra.disabled = false; //habilitem els botons
 
             teclat.appendChild(lletra); //Afegim al contenidor del tecla
         }
@@ -373,6 +420,8 @@ const crearTeclat = () => {
             lletra.setAttribute("aria-label", "Lletra " + LLETRES_ESP[i]);
             lletra.addEventListener("click", verificarLletra);
 
+            lletra.disabled = false; //habilitem els botons
+
             teclat.appendChild(lletra); //Afegim al contenidor del tecla
         }
     }
@@ -385,6 +434,8 @@ const crearTeclat = () => {
             lletra.setAttribute("aria-label", "Lletra " + LLETRES_CA[i]);
             lletra.addEventListener("click", verificarLletra);
 
+            lletra.disabled = false; //habilitem els botons
+
             teclat.appendChild(lletra); //Afegim al contenidor del tecla
         }
     }
@@ -395,6 +446,9 @@ const crearTeclat = () => {
 //Crida de la funció per crear el teclat;
 crearTeclat();
 
+const buidarTeclat = () => {
+    teclat.replaceChildren();
+}
 
 /* ==========================================================================
    Events
