@@ -41,6 +41,7 @@ let partides = 0;
 let guanyades = 0;
 let record = 0;
 let ratxa = 0;
+let dataRecord = "";
 
 //Teclat lletres
 const teclat = document.querySelector("#teclat-lletres");
@@ -64,10 +65,10 @@ let puntuacioMesAlta = Number(localStorage.getItem("puntuacioMesAlta"));
 
 const navegadorWeb = JSON.parse(sessionStorage.getItem("navegadorWeb"));
 
-const jugador1 = llegirCookie("jugador1");
+const nomJugador1 = llegirCookie("jugador1");
 
 function llegirCookie(nom) {
-    const cookies = document.cookie.split("; ");     // ["idioma=ca", "tema=fosc"]
+    const cookies = document.cookie.split("; ");
 
     for (const cookie of cookies) {
         const [clau, valor] = cookie.split("=");
@@ -82,7 +83,7 @@ function llegirCookie(nom) {
    Funcions
    ========================================================================== */
 
-console.log("El nom del jugador1 és: " + jugador1);
+console.log("El nom del jugador1 és: " + nomJugador1);
 console.log(puntuacioMesAlta);
 console.log(navegadorWeb);
 
@@ -109,7 +110,7 @@ const mostrarInstruccions = () => {
 /* ---PARAULA A ENDEVINAR--- */
 //Idioma de la paraula
 const establirIdioma = () => {
-
+    idioma.textContent = "Idioma (" + navegadorWeb.idioma + ")";
 }
 
 establirIdioma();
@@ -126,7 +127,21 @@ const mostrarParaula = () => {
     }
 }
 
-/* --COMENÇAR PARTIDA-- */
+/* ---TARGETA DEL JUGADOR--- */
+
+const mostrarTargetaJugador1 = () => {
+    nomJugador.textContent = nomJugador1;
+    puntsActuals = punts;
+    totalPartides = partides;
+    partidesGuanyades = guanyades;
+    recordActual.textContent = dataRecord + " - " + record; 
+}
+
+mostrarTargetaJugador1();
+
+/* --------------------- */
+
+/* ---COMENÇAR PARTIDA--- */
 //Mostrar títol
 const mostrarTitol = (titolAMostrar) =>{
     let titolNou = "";
