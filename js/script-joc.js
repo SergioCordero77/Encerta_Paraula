@@ -16,7 +16,8 @@ const idiomaProva = "CA";
 
 //Paraula a endevinar
 const inputParaula = document.querySelector("#input-paraula");
-let paraulaAEndevinar = "";
+let paraulaAEndevinar = ""; //Guardarem la paraula de l'input abans de borrarlo
+let paraulaOculta = "";     //Guardarem la paraula transformada en oculta '_ _ _ _'
 
 //Botó veure paraula
 const botoVeureParaula = document.querySelector("#btn-veure-paraula");
@@ -35,6 +36,8 @@ const partidesGuanyades = document.querySelector("#partides_guanyades");
 const recordActual = document.querySelector("#record-partida");
 
 //variables de partida
+let contErrors = 0;
+
 let punts = 0;
 let partides = 0;
 let guanyades = 0;
@@ -99,6 +102,17 @@ const mostrarParaula = () => {
 }
 
 /* --COMENÇAR PARTIDA-- */
+//Mostrar títol
+const mostrarTitol = (titolAMostrar) =>{
+    let titolNou = "";
+    
+    for(let i=0; i<titolAMostrar.length; i++){
+        titolNou += " " + titolAMostrar.charAt(i) + " ";
+    }
+
+    titol.textContent = titolNou;
+}
+
 //Començar partida
 const comencarPartida = () => {
     const valorParaula = inputParaula.value.trim();
@@ -134,13 +148,18 @@ const comencarPartida = () => {
     console.log("Paraula correcte");
 
     // Canviem el títol principal per tants '_' com de llarga sigui la paraula
-    titol.textContent = "";
+    let titolAMostrar = "";
+
     for(let i=0; i<valorParaula.length; i++){
-        titol.textContent += " _ "
+        titolAMostrar += "_"
     }
 
+    paraulaOculta = titolAMostrar;  // Actualizem la paraula oculta
+
+    mostrarTitol(titolAMostrar);    // Crida a la funció per mostrar bé el títol
+
     //Dashabilitar botó i input
-    paraulaAEndevinar = inputParaula.value;
+    paraulaAEndevinar = inputParaula.value; //Guardem la paraula en una variable
     inputParaula.value = "";
     botoComencarPartida.disabled = true;
     inputParaula.disabled = true;
@@ -154,39 +173,63 @@ const tancarDialeg = () => {
 
 //Verificar lletra
 const verificarLletra = (event) => {
-    const valorParaula = paraulaAEndevinar.toUpperCase();
-    let paraulaOculta = titol.textContent;
-    let cadenaNova = "";
-    let contErrors = 0;
-    let lletraEncertada = false;
-            
+    const valorParaula = paraulaAEndevinar.toUpperCase(); // Passem la paraula a majúscula per poder comparar amb les lletres majúscules
+    let cadenaNova = "";                                  // Construim el nou String
+    let lletraEncertada = false;                          // Controlar si s'encerta la lletra
+    const lletraTeclat = event.currentTarget.textContent; // Lletra del botó        
+    
     for(let i = 0; i<valorParaula.length; i++){
-        let lletraParaula = valorParaula.charAt(i);
-        const lletraTeclat = event.currentTarget.textContent;
+        let lletraParaula = valorParaula.charAt(i);             // Lletra de la paraula a endevinar    
+        let lletraParaulaOculta = paraulaOculta.charAt(i);      // LLetra de la paraula oculta (inicialment només són '_')
+
+        // Si en la paraula oculta ja hi ha una lletra, vol dir que és una
+        // lletra que s'havia encertat previament i la concatenem
+        if (lletraParaulaOculta != '_'){
+            cadenaNova += lletraParaulaOculta;
+
+            continue;
+        }
 
         if(lletraParaula===lletraTeclat){
-            for(let j=0; j<valorParaula.length; j++){
+            cadenaNova += lletraTeclat;
 
-                if (valorParaula.charAt(j)===lletraTeclat){
-                    cadenaNova += " " + lletraTeclat + " ";
-                }
-                else{
-                    cadenaNova += " _ ";
-                }
-
-            }
-            titol.textContent = cadenaNova;
             lletraEncertada = true;
         }
+        else{
+            cadenaNova += "_";
+        }
     }
-
+    
+    // Si no s'ha encertat la lletra, actualitzem les imatges
     if(!lletraEncertada){
-        imatgeGlobus.src = "img/img_globus/img_" + contErrors++ + ".png";
-        event.currentTarget.disabled = true;
+        imatgeGlobus.src = "img/img_globus/img_" + ++contErrors + ".png";
+        event.currentTarget.disabled = true;    //Deshabilitem el botó de la lletra clickada
+        
+        //Derrota
+        // Si el comptador arriva a 9, es perd la partida
+        if (contErrors===9){
+            partides++;
+        }
+
         return;
     }
+    
+    // Actualizem la paraula oculta
+    // Per exemple, la paraula es 'casa' i s'ha clickat la 'a'
+    // Paraula oculta serà '_a_a'
+    paraulaOculta = cadenaNova;
 
-    event.currentTarget.disabled = true;
+    console.log(paraulaOculta);
+
+    mostrarTitol(cadenaNova);
+    event.currentTarget.disabled = true;    //Deshabilitem el botó de la lletra clickada
+    
+    //Victoria
+    //Si a la paraula oculta no hi ha '_' vol dir que ja s'ha encertat la paraula
+    if (!paraulaOculta.includes("_")){
+        partides++;
+        partidesGuanyades++;
+    }
 }
 
 //Teclat
