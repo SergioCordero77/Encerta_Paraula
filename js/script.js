@@ -28,9 +28,10 @@ const errorJugador2 = document.querySelector("#error-player2");
 
 // Puntuació més alta
 const puntuacioAlta = document.querySelector("#high-score-value");
-let puntuacioMesAlta = 0;
-let jugadorMesPuntuacio = "";
-let dataAsoliment = "";
+/* ---RECUPERACIÓ D'INFORMACIÓ DEL LOCALSTORAGE--- */
+let nomJugadorRecord = localStorage.getItem("nomJugador1");
+let record = localStorage.getItem("record");
+let dataRecord = localStorage.getItem("dataRecord");
 
 // Navegador
 const navegador = document.querySelector("#browser-value");
@@ -53,14 +54,13 @@ const navegadorWeb = {
     color: ""
 };
 
-/* ---RECUPERACIÓ D'INFORMACIÓ--- */
-let nomJugadorRecord = localStorage.getItem("numJugador1");
-let record = localStorage.getItem("record");
-let dataRecord = localStorage.getItem("dataRecord");
-
 /* ==========================================================================
    Funcions
    ========================================================================== */
+
+console.log("El nom amb el record és: " + nomJugadorRecord);
+console.log("El record es " + record);
+console.log("La data del record es: " + dataRecord)
 
 /* ---VALIDAR BOTONS--- */
 const validarBotoPlayer1 = () => {
@@ -215,8 +215,8 @@ const validarNomPlayer2 = () => {
 
 // Puntuació més alta
 const mostrarPuntuacio = () => {
-    if (puntuacioMesAlta === 0){
-        puntuacioAlta.textContent = "No hi ha puntuació actual";
+    if (record === null){
+        puntuacioAlta.textContent = "No hi ha cap record establert";
     }
     else{
         puntuacioAlta.textContent = nomJugadorRecord + " - " + record + " - " + dataRecord;
@@ -326,10 +326,6 @@ const comencarPartida = (event) => {
     // Guardem el nom dels jugadors
     document.cookie = "jugador1=" + encodeURIComponent(nomJugador1);
     document.cookie = "jugador2=" + encodeURIComponent(nomJugador2);
-    
-    /* ---LOCALSTORAGE--- */
-    //Guardem la puntuació més alta
-    localStorage.setItem("puntuacioMesAlta", puntuacioMesAlta);
 
     form.reset();
 
@@ -341,12 +337,12 @@ const esborrarPuntuacio = () => {
     const confirmacio = confirm("Estàs segur que vols esborrar la informació de la puntuació?");
 
     if (confirmacio){
-        localStorage.removeItem("numJugador");
+        localStorage.removeItem("nomJugador1");
         localStorage.removeItem("record");
         localStorage.removeItem("dataRecord");
-    
-        mostrarPuntuacio();
     }
+
+    mostrarPuntuacio();
 }
 
 /* ==========================================================================

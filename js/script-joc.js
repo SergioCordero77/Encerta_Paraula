@@ -39,9 +39,9 @@ let contErrors = 0;
 let punts = 0;
 let partides = 0;
 let guanyades = 0;
-let record = 0;
+//let record = 0;
 let ratxa = 0;
-let dataRecord = "";
+//let dataRecord = "";
 
 //Teclat lletres
 const teclat = document.querySelector("#teclat-lletres");
@@ -61,7 +61,9 @@ const botoTancarDialeg = document.querySelector("#btn-tancar-error");
 document.title = "Nom_Jugador (" + guanyades + ")";
 
 /* ---RECUPERACIÓ D'INFORMACIÓ--- */
-let puntuacioMesAlta = Number(localStorage.getItem("puntuacioMesAlta"));
+let nomJugadorRecord = localStorage.getItem("nomJugador1");
+let record = Number(localStorage.getItem("record")) || 0;
+let dataRecord = localStorage.getItem("dataRecord");
 
 const navegadorWeb = JSON.parse(sessionStorage.getItem("navegadorWeb"));
 
@@ -83,9 +85,13 @@ function llegirCookie(nom) {
    Funcions
    ========================================================================== */
 
+console.log("Cookie:", document.cookie);
 console.log("El nom del jugador1 és: " + nomJugador1);
-console.log(puntuacioMesAlta);
+console.log("El nom amb el record és: " + nomJugadorRecord);
+console.log("El record es " + record);
+console.log("La data del record es: " + dataRecord)
 console.log(navegadorWeb);
+
 
 /* ---TORNAR--- */
 //Tornar a la pàgina principal
