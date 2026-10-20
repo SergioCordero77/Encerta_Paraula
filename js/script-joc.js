@@ -57,9 +57,6 @@ const dialegError = document.querySelector("#dialeg-error");
 const missatgeError = document.querySelector("#missatge-error");
 const botoTancarDialeg = document.querySelector("#btn-tancar-error");
 
-//Títol de la pestanya
-document.title = nomJugador1 + "(" + guanyades + ")";
-
 /* ---RECUPERACIÓ D'INFORMACIÓ--- */
 let nomJugadorRecord = localStorage.getItem("nomJugador1");
 let record = Number(localStorage.getItem("record"));
@@ -80,6 +77,9 @@ function llegirCookie(nom) {
     }
     return null;
 }
+
+//Títol de la pestanya
+document.title = nomJugador1 + "(" + guanyades + ")";
 
 /* ==========================================================================
    Funcions
@@ -266,7 +266,7 @@ const guanyarPartida = () => {
     inputParaula.placeholder="Introduceix una paraula";
 
     //Actualitzem el títol / pestaña
-    document.title = "Nom_Jugador (" + guanyades + ")";
+    document.title = nomJugador1 + "(" + guanyades + ")";
 
     //Mostrem la tarjeta amb la informació actualitzada
     mostrarTargetaJugador1();
