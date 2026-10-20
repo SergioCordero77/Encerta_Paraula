@@ -58,11 +58,11 @@ const missatgeError = document.querySelector("#missatge-error");
 const botoTancarDialeg = document.querySelector("#btn-tancar-error");
 
 //Títol de la pestanya
-document.title = "Nom_Jugador (" + guanyades + ")";
+document.title = nomJugador1 + "(" + guanyades + ")";
 
 /* ---RECUPERACIÓ D'INFORMACIÓ--- */
 let nomJugadorRecord = localStorage.getItem("nomJugador1");
-let record = Number(localStorage.getItem("record")) || 0;
+let record = Number(localStorage.getItem("record"));
 let dataRecord = localStorage.getItem("dataRecord");
 
 const navegadorWeb = JSON.parse(sessionStorage.getItem("navegadorWeb"));
@@ -141,7 +141,7 @@ const mostrarTargetaJugador1 = () => {
     totalPartides.textContent = partides;
     partidesGuanyades.textContent = guanyades;
 
-    if (record===0){
+    if (record===null){
         recordActual.textContent = "Encara no establert"
     }
     else{

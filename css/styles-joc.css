@@ -7,36 +7,28 @@
     padding: 0;
 }
 
+html, body {
+    height: 100%;
+}
+
 body {
     font-family: 'Courier New', Courier, monospace;
-    background-color: #f1f8db; /* Fons verd clar general */
-    padding: 15px;
+    background-color: #f1f8db;
+    padding: 20px 30px; /* Mateix padding a dalt i a baix */
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    justify-content: center; /* Centra el contingut verticalment */
+    min-height: 100vh;
+    gap: 12px;
     color: #000;
 }
 
 /* Background-color diferents segons el navegador */
-.firefox-color{
-    background-color: #f4f8d3;
-}
-
-.chrome-color{
-    background-color: #7ae474;
-}
-
-.safari-color{
-    background-color: #a3d5ee;
-}
-
-.edge-color{
-    background-color: #9898e8;
-}
-
-.altres-color{
-    background-color: #eea291;
-}
+.firefox-color { background-color: #f4f8d3; }
+.chrome-color { background-color: #7ae474; }
+.safari-color { background-color: #a3d5ee; }
+.edge-color { background-color: #9898e8; }
+.altres-color { background-color: #eea291; }
 
 /* ==========================================================================
    Barra Superior (Header / Menu)
@@ -45,8 +37,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 10px;
-    flex-wrap: wrap;
+    gap: 15px;
+    width: 100%;
 }
 
 /* Botons verdosos superiors */
@@ -54,12 +46,13 @@ body {
     background-color: #c0f179;
     border: 2px solid #000;
     border-radius: 10px;
-    padding: 10px 20px;
+    padding: 10px 22px;
     font-size: 1.1rem;
     font-weight: bold;
     cursor: pointer;
     box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
     transition: background-color 0.2s, transform 0.1s;
+    white-space: nowrap;
 }
 
 .btn-green:hover {
@@ -74,7 +67,7 @@ body {
 .input-container {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     font-size: 1rem;
 }
 
@@ -93,8 +86,9 @@ body {
     border: 1px solid #777;
     border-radius: 2px;
     font-family: inherit;
-    width: 260px;
+    width: 250px;
     font-size: 0.9rem;
+    background-color: #ffffff;
 }
 
 /* Botó d'ull per veure la paraula */
@@ -109,32 +103,36 @@ body {
 }
 
 /* ==========================================================================
-   Banner del Títol Principal
+   Banner del Títol Principal (Corregit separació de lletres)
    ========================================================================== */
 .banner-title {
     background-color: #c9d2f8; /* Blau lilós del títol */
     border-radius: 12px;
-    padding: 20px;
+    padding: 18px 20px;
     text-align: center;
+    width: 100%;
 }
 
 .banner-title h1 {
-    font-size: 2.3rem;
+    font-size: 1.8rem;
     font-weight: normal;
-    letter-spacing: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.8em; /* Separa les lletres regularment sense apegar-se */
+    text-indent: 0.8em;   /* Compensa el centrat per la darrera lletra */
+    margin: 0;
 }
 
 .banner-title-win {
     background-color: #0ef161; /* Verd del títol */
     border-radius: 12px;
-    padding: 20px;
+    padding: 18px 20px;
     text-align: center;
 }
 
 .banner-title-lose {
     background-color: #d73222; /* Vermell del títol */
     border-radius: 12px;
-    padding: 20px;
+    padding: 18px 20px;
     text-align: center;
 }
 
@@ -142,82 +140,95 @@ body {
    Àrea Principal de Joc (Estadístiques + Imatge)
    ========================================================================== */
 .game-area {
-    background-color: #fbd6c6; /* Fons rosat / taronja clar */
+    background-color: #fbd6c6;
     border-radius: 12px;
-    padding: 20px;
+    padding: 25px 30px;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    gap: 40px;
-    min-height: 320px;
+    justify-content: space-around; /* Reparteix l'espai entre la targeta i la imatge */
+    gap: 30px;
+    flex: 1;
+    width: 100%;
 }
 
-/* Targeta d'estadístiques del jugador */
+/* Targeta d'estadístiques del jugador ampliada i centrada */
 .stats-card {
-    background-color: #b1486d; /* Granat / fúcsia fosc */
+    background-color: #b1486d;
     color: #ffffff;
     border-radius: 15px;
-    width: 250px;
-    padding: 15px;
+    width: 290px; /* Ampliada de 240px a 290px */
+    padding: 22px 20px;
     text-align: center;
     box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra el contingut horitzontalment */
+    justify-content: center;
 }
 
 .stats-header {
-    font-size: 1.2rem;
+    font-size: 1.35rem; /* Text del nom lleugerament més gran */
     font-weight: bold;
-    margin-bottom: 15px;
+    margin-bottom: 18px;
     text-decoration: underline;
+    text-align: center;
+    width: 100%;
 }
 
 .stats-body {
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    font-size: 0.8rem;
+    align-items: center; /* Centra les etiquetes i valors */
+    gap: 8px;
+    font-size: 0.85rem; /* Mida de font augmentada */
+    width: 100%;
+    text-align: center;
 }
 
 .stat-label {
     text-transform: uppercase;
     font-weight: bold;
-    margin-top: 4px;
+    margin-top: 6px;
+    text-align: center;
 }
 
 .stat-value {
-    margin-bottom: 6px;
+    margin-bottom: 4px;
+    text-align: center;
 }
 
-/* Marc de la imatge */
+/* Marc de la imatge del globus ampliat acorde a la targeta */
 .image-box {
     border: 2px solid #000;
     border-radius: 15px;
-    width: 320px;
-    height: 240px;
+    width: 380px;  /* Ampliat de 320px a 380px */
+    height: 280px; /* Ampliat de 240px a 280px */
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: transparent;
-    margin: 0 auto; /* Centrat si cal */
+    margin: 0 auto;
 }
 
 .image-box img {
-    max-width: 90%;
-    max-height: 90%;
+    max-width: 92%;
+    max-height: 92%;
     object-fit: contain;
 }
 
 /* ==========================================================================
-   Teclat de Lletres
+   Teclat de Lletres (Ajustat espai inferior)
    ========================================================================== */
 .keyboard {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 6px;
-    /* Afegim margin-bottom i padding per evitar que les lletres quedin enganxades a la part inferior */
-    margin-top: 10px;
-    margin-bottom: 25px; 
-    padding-bottom: 10px;
+    margin-top: 5px;
+    margin-bottom: 0px; /* S'ha eliminat el marge sobrant inferior */
+    padding-bottom: 0px;
+    width: 100%;
 }
 
 /* Estil dels botons individuals del teclat */
@@ -225,7 +236,7 @@ body {
     background-color: #c0f179;
     border: 1px solid #77b822;
     border-radius: 6px;
-    color: #d10000; /* Lletres en vermell com en la imatge */
+    color: #d10000; /* Lletres en vermell */
     font-weight: bold;
     font-size: 1.1rem;
     font-family: inherit;

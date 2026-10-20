@@ -1,82 +1,96 @@
 /* ==========================================================================
-   Configuració General i Reset Bàsic
+   Configuració General i Reset Bàsic (Sense Scroll)
    ========================================================================== */
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Evita qualsevol scroll */
+}
+
 body {
     background-color: #f4f8d3; /* Color de fons verd pastel clar */
     font-family: 'Courier New', Courier, monospace; /* Tipografia estil màquina d'escriure */
     color: #000000;
-    margin: 0;
-    padding: 40px 20px;
     display: flex;
     justify-content: center;
+    align-items: center;
+    padding: 15px;
 }
 
 .container {
     width: 100%;
     max-width: 650px;
+    height: 100%;
+    max-height: 95vh;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Distribueix l'espai uniformement */
 }
 
 /* Background-color diferents segons el navegador */
-.firefox-color{
-    background-color: #f4f8d3;
-}
+.firefox-color { background-color: #f4f8d3; }
+.chrome-color { background-color: #7ae474; }
+.safari-color { background-color: #a3d5ee; }
+.edge-color { background-color: #9898e8; }
+.altres-color { background-color: #eea291; }
 
-.chrome-color{
-    background-color: #7ae474;
-}
-
-.safari-color{
-    background-color: #a3d5ee;
-}
-
-.edge-color{
-    background-color: #9898e8;
-}
-
-.altres-color{
-    background-color: #eea291;
-}
 /* ==========================================================================
-   Encapçalaments i Textos Formativa
+   Encapçalaments i Textos
    ========================================================================== */
 h1 {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: bold;
-    margin-bottom: 25px;
+    margin: 0 0 5px 0;
     letter-spacing: 1px;
 }
 
 h2 {
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     font-weight: bold;
-    margin-top: 35px;
-    margin-bottom: 15px;
+    margin: 8px 0 5px 0;
 }
 
 /* Nota de camp obligatori */
 .required-note {
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     color: #666666;
-    margin-bottom: 15px;
+    margin: 0 0 8px 0;
 }
 
 /* ==========================================================================
-   Selecció de Jugadors (Radio Buttons)
+   Formulari Principal i Selecció de Jugadors
    ========================================================================== */
+#game-form {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-around;
+}
+
 .radio-group {
     border: none;
-    margin-bottom: 20px;
-    font-size: 1.1rem;
+    margin: 0;
+    padding: 0;
+    font-size: 0.95rem;
 }
 
 .radio-group legend {
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
+}
+
+.radio-group div {
+    display: inline-block;
 }
 
 .radio-group label {
-    margin: 0 15px;
+    margin: 0 10px;
     cursor: pointer;
 }
 
@@ -87,29 +101,26 @@ h2 {
 /* ==========================================================================
    Secció d'Entrada de Dades i Camps del Jugador
    ========================================================================== */
-/* ==========================================================================
-   Secció d'Entrada de Dades i Camps del Jugador
-   ========================================================================== */
 .input-section {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 40px;
+    margin-bottom: 5px;
 }
 
 /* Fila principal que conté la etiqueta i el bloc d'input */
 .input-row {
     display: flex;
-    align-items: center; /* Alinea verticalment la label amb el camp d'entrada */
+    align-items: center;
     justify-content: center;
-    gap: 15px;
+    gap: 10px;
     width: 100%;
-    margin-bottom: 20px; 
+    margin-bottom: 5px; 
 }
 
 .input-row label {
-    font-family: monospace, Courier, monospace; /* Tipografia similar a la imatge */
-    font-size: 0.95rem;
+    font-family: monospace, Courier, monospace;
+    font-size: 0.85rem;
     color: #333;
 }
 
@@ -118,26 +129,27 @@ h2 {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 280px; /* Ajusta l'amplada segons les teves necessitats */
+    width: 250px;
 }
 
 /* Text d'ajuda superior */
 .help-text {
     font-family: monospace, Courier, monospace;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: #555555;
-    margin: 0 0 4px 0;
-    width: 18.2rem;
+    margin: 0 0 2px 0;
+    width: 100%;
+    text-align: left;
 }
 
 /* Estils de l'input */
 .input-row input {
     font-family: inherit;
     width: 100%;
-    padding: 6px 10px;
+    padding: 4px 8px;
     border: 1px solid #777;
-    border-radius: 0px;
-    font-size: 0.9rem;
+    border-radius: 2px;
+    font-size: 0.85rem;
     box-sizing: border-box;
     background-color: #fff;
 }
@@ -149,57 +161,41 @@ h2 {
 /* Missatge d'error o d'èxit a sota del camp */
 .missatge-error {
     font-family: monospace, Courier, monospace;
-    font-size: 0.75rem;
-    margin-top: 4px;
+    font-size: 0.7rem;
+    margin-top: 2px;
     display: block;
-    min-height: 1rem; /* Reserva espai vertical per tal que no hi hagi salts visuals */
+    min-height: 0.85rem;
 }
 
-/* Amagar objecte */
-.hide-item {
-  display: none;
-}
-
-/* Mostrar objecte */
-.show-item {
-  display: block;
-}
-
-.asterisk {
-    color: #d9534f;
-}
-
-.input-row input {
-    font-family: inherit;
-    width: 260px;
-    padding: 6px 10px;
-    border: 1px solid #777;
-    border-radius: 2px;
-    font-size: 0.9rem;
-    box-sizing: border-box;
-}
-
-.input-row input::placeholder {
-    color: #a9a9a9;
-}
+/* Amagar i mostrar objecte */
+.hide-item { display: none; }
+.show-item { display: block; }
+.asterisk { color: #d9534f; }
 
 /* ==========================================================================
    Textos Informatius i Estadístiques
    ========================================================================== */
 .info-text {
-    font-size: 1rem;
+    font-size: 0.85rem;
     color: #333333;
-    margin: 10px 0 25px 0;
+    margin: 2px 0 8px 0;
+}
+
+/* Missatges d'estat i alertes compactes */
+#status-message, #error-message {
+    margin: 0;
+    font-size: 0.75rem;
+    min-height: 1rem;
 }
 
 /* ==========================================================================
    Grup de Botons Inferiors i Accions
    ========================================================================== */
 .button-group {
-    margin-top: 50px;
+    margin-top: 10px;
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 15px;
 }
 
 .button-group input,
@@ -207,51 +203,39 @@ h2 {
     font-family: inherit;
     background-color: #bdf262; /* Verd brillant del botó */
     border: 1.5px solid #000;
-    border-radius: 12px;
-    padding: 12px 24px;
-    font-size: 1.1rem;
+    border-radius: 10px;
+    padding: 8px 16px;
+    font-size: 0.95rem;
     font-weight: 500;
     cursor: pointer;
     transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
-.button-group input,
+.button-group input:hover,
 .button-group button:hover {
     background-color: #abf041;
 }
 
-.button-group input,
+.button-group input:active,
 .button-group button:active {
     transform: scale(0.98);
 }
 
-
 /* ==========================================================================
    Validacions
    ========================================================================== */
-
-/* Quan el camp és correcte, el mateix espai mostra "✔ Correcte" en verd (classe .ok afegida per JavaScript). */
 .missatge-error.ok {
-  color: #2b8a3e;
+    color: #2b8a3e;
 }
 
-/* ESTATS DE VALIDACIÓ
-   Aquí no fem servir :user-invalid / :user-valid: és JavaScript qui decideix quan un camp és correcte o
-   no, i li afegeix les classes .invalid o .valid.
-   - .invalid -> vora gruixuda (2px) vermella. El color sol no és suficient (daltonisme), per això també
-     hi ha el missatge de text i el canvi de gruix.
-   - .valid   -> vora gruixuda verda (el camp s'ha validat i és correcte).
-   El !important és necessari perquè la regla input:not([type="checkbox"]) de dalt és més específica
-   que una simple classe i, sense ell, guanyaria la vora grisa. */
 .invalid {
-  border: 2px solid #c92a2a !important;
+    border: 2px solid #c92a2a !important;
 }
 
 .valid {
-  border: 2px solid #2b8a3e !important;
+    border: 2px solid #2b8a3e !important;
 }
 
-/* El camp invàlid, quan té el focus, manté un contorn visible (més clar, per diferenciar-lo de la vora). */
 .invalid:focus {
-  outline: 3px solid #ffa8a8;
+    outline: 3px solid #ffa8a8;
 }
