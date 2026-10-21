@@ -290,3 +290,19 @@ body {
     border-radius: 6px;
     cursor: pointer;
 }
+
+
+.dialeg-fi-partida {
+    width: 80%;
+    max-width: 700px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#img-dialog {
+    display: block;
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    margin: 10px auto;
+}

@@ -54,6 +54,7 @@ const LLETRES_CA = ['a', 'b', 'c', 'ç', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
 const dialegError = document.querySelector("#dialeg-error");
 const titolError = document.querySelector("#titol-error");
 const missatgeError = document.querySelector("#missatge-error");
+const imatgeDialeg = document.querySelector('#img-dialog');
 const botoTancarDialeg = document.querySelector("#btn-tancar-error");
 
 /* ---RECUPERACIÓ D'INFORMACIÓ--- */
@@ -164,6 +165,17 @@ const mostrarTitol = (titolAMostrar) =>{
     titol.textContent = titolNou;
 }
 
+//Reiniciar diàleg
+const reiniciarDialeg = () => {
+    dialegError.classList.remove("dialeg-fi-partida")
+    dialegError.classList.add("dialeg-error")
+    
+    //Treiem la imagte de guanyar o perdre
+    imatgeDialeg.src = ""
+    imatgeDialeg.alt = ""
+    imatgeDialeg.classList.remove("img-dialog")
+}
+
 //Començar partida
 const comencarPartida = () => {
     const valorParaula = inputParaula.value.trim();
@@ -173,6 +185,8 @@ const comencarPartida = () => {
         titolError.textContent = "Error"
         missatgeError.textContent = "Has d’afegir una paraula per poder començar a jugar";
         
+        reiniciarDialeg();
+
         dialegError.showModal();
 
         return;
@@ -183,6 +197,8 @@ const comencarPartida = () => {
                 titolError.textContent = "Error"
                 missatgeError.textContent = "La paraula no pot contenir números";
                 
+                reiniciarDialeg();
+
                 dialegError.showModal();
 
                 return;
@@ -192,6 +208,8 @@ const comencarPartida = () => {
             titolError.textContent = "Error"
             missatgeError.textContent = "La paraula ha de contenir més de 3 caràcters";
             
+            reiniciarDialeg();
+
             dialegError.showModal();
 
             return;
@@ -240,12 +258,38 @@ const comencarPartida = () => {
     mostrarTargetaJugador1();
 }
 
+/* --- DIALEG --- */
+
 //Tancar diàleg
 const tancarDialeg = () => {
     dialegError.close();
 }
 
-/* --------------------- */
+//Diàleg quan guanyes la partida
+const mostrarDialegGuanyar = () =>{
+    dialegError.classList.add("dialeg-fi-partida")
+    titolError.textContent = "Felicitats"
+    missatgeError.textContent = "Has guanyat";
+    //imatge del dialeg
+    imatgeDialeg.src = "img/gif_guanyar_perdre/guanyar.gif"
+    imatgeDialeg.alt = "GIF animat de guanya"
+    imatgeDialeg.classList.add("img-dialog")
+
+    dialegError.showModal();
+}
+
+//Diàleg quan perds la partida
+const mostrarDialegPerdre = () =>{
+    dialegError.classList.add("dialeg-fi-partida")
+    titolError.textContent = "Oh no!"
+    missatgeError.textContent = "Has perdut";
+    //imatge del dialeg
+    imatgeDialeg.src = "img/gif_guanyar_perdre/perdre.gif"
+    imatgeDialeg.alt = "GIF animat de perdre"
+    imatgeDialeg.classList.add("img-dialog")
+            
+    dialegError.showModal();
+}
 
 /* ---LÒGICA DE GUANYA I PERDRE--- */
 
@@ -281,10 +325,7 @@ const guanyarPartida = () => {
     ratxa = 0;
     contErrors = 0;
 
-    titolError.textContent = "Felicitats"
-    missatgeError.textContent = "Has guanyat";
-            
-    dialegError.showModal();
+    mostrarDialegGuanyar();
 }
 
 //Perdre la partida
@@ -315,11 +356,7 @@ const perdrePartida = () => {
     ratxa = 0;
     contErrors = 0;
 
-
-    titolError.textContent = "Oh no!"
-    missatgeError.textContent = "Has perdut";
-            
-    dialegError.showModal();
+    mostrarDialegPerdre();
 }
 
 /* --------------------- */
