@@ -39,9 +39,7 @@ let contErrors = 0;
 let punts = 0;
 let partides = 0;
 let guanyades = 0;
-//let record = 0;
 let ratxa = 0;
-//let dataRecord = "";
 
 //Teclat lletres
 const teclat = document.querySelector("#teclat-lletres");
@@ -54,6 +52,7 @@ const LLETRES_CA = ['a', 'b', 'c', 'ç', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
 
 //Diàlegs d'error
 const dialegError = document.querySelector("#dialeg-error");
+const titolError = document.querySelector("#titol-error");
 const missatgeError = document.querySelector("#missatge-error");
 const botoTancarDialeg = document.querySelector("#btn-tancar-error");
 
@@ -171,6 +170,7 @@ const comencarPartida = () => {
     const patroNum = /[0-9]/;
 
     if(valorParaula === ""){
+        titolError.textContent = "Error"
         missatgeError.textContent = "Has d’afegir una paraula per poder començar a jugar";
         
         dialegError.showModal();
@@ -180,6 +180,7 @@ const comencarPartida = () => {
     else{
         if (valorParaula.length>=4){
             if (patroNum.test(valorParaula)){
+                titolError.textContent = "Error"
                 missatgeError.textContent = "La paraula no pot contenir números";
                 
                 dialegError.showModal();
@@ -188,6 +189,7 @@ const comencarPartida = () => {
             }
         }
         else{
+            titolError.textContent = "Error"
             missatgeError.textContent = "La paraula ha de contenir més de 3 caràcters";
             
             dialegError.showModal();
@@ -217,6 +219,9 @@ const comencarPartida = () => {
 
     //Reiniciem puntuació
     punts = 0;
+
+    //Reiniciem punt de partida del globus
+    imatgeGlobus.src = "img/img_globus/img_0.png";
 
     //Dashabilitar botó i input
     paraulaAEndevinar = inputParaula.value; //Guardem la paraula en una variable
@@ -271,9 +276,15 @@ const guanyarPartida = () => {
     //Mostrem la tarjeta amb la informació actualitzada
     mostrarTargetaJugador1();
 
-    //Reiniciem puntuació i ratxa
+    //Reiniciem puntuació, ratxa i contErrors
     punts = 0;
     ratxa = 0;
+    contErrors = 0;
+
+    titolError.textContent = "Felicitats"
+    missatgeError.textContent = "Has guanyat";
+            
+    dialegError.showModal();
 }
 
 //Perdre la partida
@@ -299,9 +310,16 @@ const perdrePartida = () => {
     //Mostrem la tarjeta amb la informació actualitzada
     mostrarTargetaJugador1();
 
-    //Reiniciem puntuació i ratxa
+    //Reiniciem puntuació, ratxa i contErrors
     punts = 0;
     ratxa = 0;
+    contErrors = 0;
+
+
+    titolError.textContent = "Oh no!"
+    missatgeError.textContent = "Has perdut";
+            
+    dialegError.showModal();
 }
 
 /* --------------------- */
