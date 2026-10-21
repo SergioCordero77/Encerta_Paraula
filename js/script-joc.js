@@ -141,7 +141,7 @@ const mostrarTargetaJugador1 = () => {
     totalPartides.textContent = partides;
     partidesGuanyades.textContent = guanyades;
 
-    if (record===null){
+    if (record===0 || nomJugador1===null){
         recordActual.textContent = "Encara no establert"
     }
     else{
@@ -282,7 +282,7 @@ const mostrarDialegGuanyar = () =>{
 const mostrarDialegPerdre = () =>{
     dialegError.classList.add("dialeg-fi-partida")
     titolError.textContent = "Oh no!"
-    missatgeError.textContent = "Has perdut";
+    missatgeError.textContent = "Has perdut!"
     //imatge del dialeg
     imatgeDialeg.src = "img/gif_guanyar_perdre/perdre.gif"
     imatgeDialeg.alt = "GIF animat de perdre"
@@ -418,8 +418,9 @@ const verificarLletra = (event) => {
 
         // Actualitzem les imatges
         imatgeGlobus.src = "img/img_globus/img_" + ++contErrors + ".png";
-        event.currentTarget.disabled = true;    //Deshabilitem el botó de la lletra clickada
-        
+        event.currentTarget.disabled = true;                    //Deshabilitem el botó de la lletra clickada
+        event.currentTarget.classList.add("key-btn-desabled");  //Canviem la classe per assenyalar que el botó està deshabilitat
+
         //Derrota
         // Si el comptador arriva a 9, es perd la partida
         if (contErrors===9){
@@ -447,7 +448,8 @@ const verificarLletra = (event) => {
     console.log(paraulaOculta);
 
     mostrarTitol(cadenaNova);
-    event.currentTarget.disabled = true;    //Deshabilitem el botó de la lletra clickada
+    event.currentTarget.disabled = true;                    //Deshabilitem el botó de la lletra clickada
+    event.currentTarget.classList.add("key-btn-desabled");  //Canviem la classe per assenyalar que el botó està deshabilitat
     
     //Victoria
     //Si a la paraula oculta no hi ha '_' vol dir que ja s'ha encertat la paraula
