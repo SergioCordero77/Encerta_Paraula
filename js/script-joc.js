@@ -81,6 +81,22 @@ function llegirCookie(nom) {
 //Títol de la pestanya
 document.title = nomJugador1 + "(" + guanyades + ")";
 
+//Ojecte jugador
+const jugador1 = {
+    nom: "",
+    punts: 0,
+    partides: 0,
+    guanyades: 0,
+    record: 0
+};
+
+//Assignació d'atribut
+jugador1.nom = nomJugador1;
+jugador1.punts = punts;
+jugador1.partides = partides;
+jugador1.guanyades = guanyades;
+jugador1.record = record;
+
 /* ==========================================================================
    Funcions
    ========================================================================== */
@@ -91,6 +107,7 @@ console.log("El nom amb el record és: " + nomJugadorRecord);
 console.log("El record es " + record);
 console.log("La data del record es: " + dataRecord)
 console.log(navegadorWeb);
+console.log("Objecte jugador = ", jugador1);
 
 
 /* ---TORNAR--- */

@@ -340,6 +340,8 @@ const esborrarPuntuacio = () => {
         localStorage.removeItem("nomJugador1");
         localStorage.removeItem("record");
         localStorage.removeItem("dataRecord");
+
+        record=null;
     }
 
     mostrarPuntuacio();
