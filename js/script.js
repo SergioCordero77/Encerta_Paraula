@@ -173,7 +173,7 @@ const validarNomPlayer2 = () => {
                 inputJugador2.classList.remove("invalid");
                 errorJugador2.classList.add("ok");
                 
-                nomJugador2 = valorNom; //Guardem el nom del jugador
+                nomJugador2 = valorNomPlayer2; //Guardem el nom del jugador
                 
                 return true;
             }
@@ -358,11 +358,11 @@ botoJugador2.addEventListener("change", validarBotoPlayer2);
 /* ---Validacions de l'input dels jugadors--- */
 // Validació del jugador 1
 inputJugador1.addEventListener("blur", validarNomPlayer1);
-inputJugador1.addEventListener("changer", validarNomPlayer1);
+inputJugador1.addEventListener("change", validarNomPlayer1);
 
 // Validació del jugador 2
 inputJugador2.addEventListener("blur", validarNomPlayer2);
-inputJugador2.addEventListener("changer", validarNomPlayer2);
+inputJugador2.addEventListener("change", validarNomPlayer2);
 
 // Començar partida
 form.addEventListener("submit", comencarPartida);

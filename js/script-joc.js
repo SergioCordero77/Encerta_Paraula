@@ -87,7 +87,8 @@ const jugador1 = {
     punts: 0,
     partides: 0,
     guanyades: 0,
-    record: 0
+    record: 0,
+    dataRecord: ""
 };
 
 //Assignació d'atribut
@@ -96,6 +97,7 @@ jugador1.punts = punts;
 jugador1.partides = partides;
 jugador1.guanyades = guanyades;
 jugador1.record = record;
+jugador1.dataRecord = dataRecord;
 
 /* ==========================================================================
    Funcions
@@ -109,6 +111,17 @@ console.log("La data del record es: " + dataRecord)
 console.log(navegadorWeb);
 console.log("Objecte jugador = ", jugador1);
 
+//Funció per actualitzat els atributs del jugador1
+const actualitzarJugador1 = () => {
+    jugador1.nom = nomJugador1;
+    jugador1.punts = punts;
+    jugador1.partides = partides;
+    jugador1.guanyades = guanyades;
+    jugador1.record = record;
+    jugador1.dataRecord = dataRecord;
+};
+
+actualitzarJugador1();
 
 /* ---TORNAR--- */
 //Tornar a la pàgina principal
@@ -209,21 +222,20 @@ const comencarPartida = () => {
         return;
     }
     else{
-        if (valorParaula.length>=4){
-            if (patroNum.test(valorParaula)){
-                titolError.textContent = "Error"
-                missatgeError.textContent = "La paraula no pot contenir números";
-                
-                reiniciarDialeg();
-
-                dialegError.showModal();
-
-                return;
-            }
-        }
-        else{
+        if (valorParaula.length<4){
             titolError.textContent = "Error"
             missatgeError.textContent = "La paraula ha de contenir més de 3 caràcters";
+            
+            reiniciarDialeg();
+
+            dialegError.showModal();
+
+            return;
+        }
+
+        if (patroNum.test(valorParaula)){
+            titolError.textContent = "Error"
+            missatgeError.textContent = "La paraula no pot contenir números";
             
             reiniciarDialeg();
 
@@ -336,6 +348,9 @@ const guanyarPartida = () => {
 
     //Mostrem la tarjeta amb la informació actualitzada
     mostrarTargetaJugador1();
+    
+    //Actualitzem la informació del jugador1 i la guardem al localStorage
+    actualitzarJugador1();
 
     //Reiniciem puntuació, ratxa i contErrors
     punts = 0;
@@ -367,6 +382,9 @@ const perdrePartida = () => {
 
     //Mostrem la tarjeta amb la informació actualitzada
     mostrarTargetaJugador1();
+
+    //Actualitzem la informació del jugador1 i la guardem al localStorage
+    actualitzarJugador1();
 
     //Reiniciem puntuació, ratxa i contErrors
     punts = 0;
