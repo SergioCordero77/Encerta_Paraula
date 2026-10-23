@@ -64,6 +64,10 @@ let nomJugadorRecord = localStorage.getItem("nomJugador1");
 let record = Number(localStorage.getItem("record"));
 let dataRecord = localStorage.getItem("dataRecord");
 
+if (dataRecord !== null) {
+    dataRecord = new Date(dataRecord).toLocaleString();
+}
+
 const navegadorWeb = JSON.parse(sessionStorage.getItem("navegadorWeb"));
 
 const nomJugador1 = llegirCookie("jugador1");

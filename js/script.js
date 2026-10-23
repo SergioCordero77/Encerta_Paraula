@@ -33,6 +33,10 @@ let nomJugadorRecord = localStorage.getItem("nomJugador1");
 let record = localStorage.getItem("record");
 let dataRecord = localStorage.getItem("dataRecord");
 
+if (dataRecord !== null) {
+    dataRecord = new Date(dataRecord).toLocaleString();
+}
+
 // Navegador
 const navegador = document.querySelector("#browser-value");
 
