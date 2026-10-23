@@ -234,6 +234,10 @@ const mostrarIdioma = () => {
 // Mostrar idioma
 mostrarIdioma();
 
+//Canvi del fons de pantalla segons el navegador
+document.body.classList.add(canviarClasseNavegador(navigator.userAgent));
+navegadorWeb.color = canviarClasseNavegador(navigator.userAgent);
+
 // Informació del navegador
 const mostrarInfoNavegador = () => {
     const arrayNoms = navegadorWeb.nom;
@@ -241,33 +245,18 @@ const mostrarInfoNavegador = () => {
 
     if (infoNav.includes("Firefox")){
         navegador.textContent = arrayNoms[1]; //Firefox
-        document.body.classList.add("firefox-color");
-        
-        navegadorWeb.color = "firefox-color";
     }
     else if (infoNav.includes("Chrome") && infoNav.includes("Safari") && !infoNav.includes("Edg")){
         navegador.textContent = arrayNoms[0]; //Chrome
-        document.body.classList.add("chrome-color");
-
-        navegadorWeb.color = "chrome-color";
     }
     else if (infoNav.includes("Chrome") && infoNav.includes("Safari") && infoNav.includes("Edg")){
         navegador.textContent = arrayNoms[3]; //Edge
-        document.body.classList.add("edge-color");
-
-        navegadorWeb.color = "edge-color";
     }
     else if (infoNav.includes("Safari") && infoNav.includes("Chrome")){
         navegador.textContent = arrayNoms[2]; //Safari
-        document.body.classList.add("safari-color");
-
-        navegadorWeb.color = "safari-color";
     }
     else{
         navegador.textContent = arrayNoms[4]; //Altres
-        document.body.classList.add("altres-color");
-
-        navegadorWeb.color = "altres-color";
     }
 }
 

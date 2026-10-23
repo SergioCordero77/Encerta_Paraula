@@ -111,6 +111,10 @@ console.log("La data del record es: " + dataRecord)
 console.log(navegadorWeb);
 console.log("Objecte jugador = ", jugador1);
 
+//Canvi del fons de pantalla segons el navegador
+document.body.classList.add(canviarClasseNavegador(navigator.userAgent));
+navegadorWeb.color = canviarClasseNavegador(navigator.userAgent);
+
 //Funció per actualitzat els atributs del jugador1
 const actualitzarJugador1 = () => {
     jugador1.nom = nomJugador1;
