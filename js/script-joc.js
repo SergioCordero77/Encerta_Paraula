@@ -9,7 +9,7 @@ const botoComencarPartida = document.querySelector("#btn-comencar");
 
 //Idioma
 const idioma = document.querySelector("#idioma");
-const idiomaProva = "CA";
+//const idiomaProva = "CA";
 
 //Paraula a endevinar
 const inputParaula = document.querySelector("#input-paraula");
@@ -69,6 +69,7 @@ if (dataRecord !== null) {
 }
 
 const navegadorWeb = JSON.parse(sessionStorage.getItem("navegadorWeb"));
+const idiomaProva = navegadorWeb.idioma;
 
 const nomJugador1 = llegirCookie("jugador1");
 
@@ -108,14 +109,14 @@ jugador1.dataRecord = dataRecord;
 /* ==========================================================================
    Funcions
    ========================================================================== */
-
+/*
 console.log("Cookie:", document.cookie);
 console.log("El nom del jugador1 és: " + nomJugador1);
 console.log("El nom amb el record és: " + nomJugadorRecord);
 console.log("El record es " + record);
 console.log("La data del record es: " + dataRecord)
 console.log(navegadorWeb);
-console.log("Objecte jugador = ", jugador1);
+console.log("Objecte jugador = ", jugador1);*/
 
 //Canvi del fons de pantalla segons el navegador
 document.body.classList.add(canviarClasseNavegador(navigator.userAgent));
@@ -517,7 +518,8 @@ const verificarLletra = (event) => {
 
 //Teclat
 const crearTeclat = () => {
-    if(idiomaProva==="EN"){
+    if(idiomaProva.includes("EN")){
+        console.log("ENtra");
         for(let i = 0; i<LLETRES_EN.length; i++){
             const lletra = document.createElement("button"); //creació de l'element botó
             lletra.textContent = LLETRES_EN[i].toUpperCase();
@@ -531,7 +533,8 @@ const crearTeclat = () => {
             teclat.appendChild(lletra); //Afegim al contenidor del tecla
         }
     }
-    else if(idiomaProva==="ESP"){
+    else if(idiomaProva.includes("ES")){
+        console.log("teclat");
         for(let i = 0; i<LLETRES_ESP.length; i++){
             const lletra = document.createElement("button"); //creació de l'element botó
             lletra.textContent = LLETRES_ESP[i].toUpperCase();
@@ -545,7 +548,7 @@ const crearTeclat = () => {
             teclat.appendChild(lletra); //Afegim al contenidor del tecla
         }
     }
-    else if(idiomaProva==="CA"){
+    else if(idiomaProva.includes("CA")){
         for(let i = 0; i<LLETRES_CA.length; i++){
             const lletra = document.createElement("button"); //creació de l'element botó
             lletra.textContent = LLETRES_CA[i].toUpperCase();
