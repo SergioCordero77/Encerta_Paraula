@@ -268,6 +268,7 @@ const mostrarTargetaJugador2 = () => {
 };
 
 mostrarTargetaJugador1();
+mostrarTargetaJugador2();
 
 /* --------------------- */
 
@@ -409,8 +410,13 @@ const comencarPartida = () => {
     //Creem el teclat nou amb tots els botons habilitat
     crearTeclat();
 
-    //Mostrem la tarjeta amb la informació actualitzada
+    //Actualitzem la informació dels jugadors
+    actualitzarJugador1();
+    actualitzarJugador2();
+
+    //Mostrem les tarjetes amb la informació actualitzada
     mostrarTargetaJugador1();
+    mostrarTargetaJugador2();
 
     //Habilitem el teclat
     teclatHabilitat = true;
