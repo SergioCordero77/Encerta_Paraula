@@ -275,14 +275,16 @@ mostrarTargetaJugador1();
 mostrarTargetaJugador2();
 
 /* ---CANVIAR DE JUGADOR SEGONS EL TORN--- */
-const canviarJugador = () => {          //jugador1
-    if (torn%arrayJugadors.length===0){
-        cartaJugador.classList.add("active-player");
-        cartaJugador2.classList.remove("active-player");
-    }
-    else{                               //jugador2
-        cartaJugador2.classList.add("active-player");
-        cartaJugador.classList.remove("active-player");
+const canviarJugador = () => {
+    if (arrayJugadors.length>1){          
+        if (torn%arrayJugadors.length===0){ //jugador1
+            cartaJugador.classList.add("active-player");
+            cartaJugador2.classList.remove("active-player");
+        }
+        else{                               //jugador2
+            cartaJugador2.classList.add("active-player");
+            cartaJugador.classList.remove("active-player");
+        }
     }
 }
 
