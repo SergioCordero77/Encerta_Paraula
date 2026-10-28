@@ -165,9 +165,6 @@ console.log("La data del record es: " + dataRecord)
 console.log(navegadorWeb);
 console.log("Objecte jugador = ", jugador1);*/
 
-console.log(nomJugador2);
-console.log(arrayJugadors.length);
-
 //Canvi del fons de pantalla segons el navegador
 document.body.classList.add(canviarClasseNavegador(navigator.userAgent));
 navegadorWeb.color = canviarClasseNavegador(navigator.userAgent);
@@ -438,6 +435,9 @@ const comencarPartida = () => {
 
     //Habilitem el teclat
     teclatHabilitat = true;
+
+    console.log("partides ", partides);
+    console.log("guanyades ", guanyades);
 }
 
 /* --- DIALEG --- */
@@ -501,16 +501,14 @@ const mostrarDialegEmpat = () =>{
 /* ---LÒGICA DE GUANYA I PERDRE--- */
 
 //Guanyar la partida 
-const guanyarPartida = (punts, 
-                        record, 
-                        dataRecord, 
-                        partides, 
+const guanyarPartida = (puntsJugador, 
+                        recordJugador,  
+                        partidesJugador, 
                         nomJugador, 
-                        guanyades, 
-                        ratxa, 
-                        contErrors) => {
-    if(punts>record){
-        record=punts;
+                        guanyadesJugador) => { 
+                        
+    if(puntsJugador>recordJugador){
+        record=puntsJugador;
         dataRecord= new Date();
 
         /* ---Guardem informació al LOCALSTORAGE--- */
@@ -519,8 +517,14 @@ const guanyarPartida = (punts,
         localStorage.setItem("dataRecord", dataRecord);
     }
     
-    partides++;
-    guanyades++;
+    //Actualitzem estadístiques
+    partidesJugador++;
+    guanyadesJugador++;
+
+    //Asignem els valors actualitzats
+    partides = partidesJugador;
+    guanyades = guanyadesJugador;
+
     bannerTitle.classList.add("banner-title-win");
 
     //Guardem les estadístiques de partides i guanyades amb els nous valors
@@ -531,8 +535,10 @@ const guanyarPartida = (punts,
     inputParaula.disabled = false;
     inputParaula.placeholder="Introduceix una paraula";
 
-    //Actualitzem el títol / pestaña
-    document.title = nomJugador1 + "(" + guanyades + ")";
+    if (arrayJugadors.length===1){
+        //Actualitzem el títol / pestaña
+        document.title = nomJugador1 + "(" + guanyades + ")";
+    }
 
     //Mostrem la tarjeta amb la informació actualitzada
     mostrarTargetaJugador1();
@@ -547,8 +553,8 @@ const guanyarPartida = (punts,
     ratxa = 0;
 
     //Reiniciem puntuació, ratxa del jugador2
-    punts = 0;
-    ratxa = 0;
+    punts2 = 0;
+    ratxa2 = 0;
 
     //Reiniciem comptador d'errors
     contErrors = 0;
@@ -574,6 +580,7 @@ const perdrePartida = () => {
     if (arrayJugadors.length===1){
         partides++;
     }
+
     else{
         //Mostrem la tarjeta amb la informació actualitzada
         mostrarTargetaJugador2();
@@ -744,37 +751,25 @@ const verificarLletra = (event) => {
         if (!paraulaOculta.includes("_")){
             if(arrayJugadors.length===1){
                 guanyarPartida (punts, 
-                                record, 
-                                dataRecord, 
+                                record,  
                                 partides, 
                                 nomJugador1, 
-                                guanyades, 
-                                punts, 
-                                ratxa, 
-                                contErrors);
+                                guanyades);
             }
             else{
                 if(punts>punts2){                   //Guanya jugador1
                     guanyarPartida (punts, 
-                                    record, 
-                                    dataRecord, 
-                                    partides, 
-                                    nomJugador1, 
-                                    guanyades, 
-                                    punts, 
-                                    ratxa, 
-                                    contErrors);
+                                record,  
+                                partides, 
+                                nomJugador1, 
+                                guanyades);
                 }
                 else if (punts2>punts){             //Guanya jugador2
                     guanyarPartida (punts2, 
-                                    record, 
-                                    dataRecord, 
+                                    record,  
                                     partides2, 
                                     nomJugador2, 
-                                    guanyades2, 
-                                    punts2, 
-                                    ratxa2, 
-                                    contErrors);
+                                    guanyades2);
                 }
                 else {
                     
