@@ -230,13 +230,8 @@ const mostrarPuntuacio = () => {
 // Mostrar la puntuació més alta
 mostrarPuntuacio();
 
-// Idioma joc
-const mostrarIdioma = () => {
-    idioma.textContent = navegadorWeb.idioma;
-}
-
 // Mostrar idioma
-mostrarIdioma();
+idioma.textContent = mostrarIdioma(navegadorWeb.idioma);
 
 //Canvi del fons de pantalla segons el navegador
 document.body.classList.add(canviarClasseNavegador(navigator.userAgent));

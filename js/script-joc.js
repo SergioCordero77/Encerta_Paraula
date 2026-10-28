@@ -157,7 +157,7 @@ const mostrarInstruccions = () => {
 /* ---PARAULA A ENDEVINAR--- */
 //Idioma de la paraula
 const establirIdioma = () => {
-    idioma.textContent = "Idioma (" + navegadorWeb.idioma + ")";
+    idioma.textContent = "Idioma (" + mostrarIdioma(idiomaProva) + ")";
 }
 
 establirIdioma();

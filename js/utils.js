@@ -22,3 +22,17 @@ function canviarClasseNavegador (infoNav) {
         return "altres-color";
     }
 }
+
+//Establir idioma del navegador
+function mostrarIdioma (navegadorIdioma) {
+
+    if (navegadorIdioma.includes("es")){
+        return "ES";
+    }
+    else if (navegadorIdioma.includes("ca")){
+        return "CA";
+    }
+    else if (navegadorIdioma.includes("en")){
+        return "EN";
+    }
+}
