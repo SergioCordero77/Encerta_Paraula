@@ -167,10 +167,12 @@ body {
     justify-content: center;
 }
 
-/* Targeta del jugador 2 amb fons verd */
 #card-jugador2 {
-    background-color: #4b7613;
-    /*display: none;*/
+    display: none;
+}
+
+#card-jugador2.show-card {
+    display: flex;
 }
 
 .active-player {

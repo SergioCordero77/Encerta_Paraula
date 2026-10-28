@@ -29,7 +29,7 @@ const imatgeGlobus = document.querySelector("#img-globus");
 /* ---JUGADORS--- */
 
 /* ---Tarjeta d'estadístiques del jugador1--- */
-
+const cartaJugador = document.querySelector("#card-jugador");
 const nomJugador = document.querySelector("#nom-jugador");
 const puntsActuals = document.querySelector("#punts-actuals");
 const totalPartides = document.querySelector("#total-partides");
@@ -37,6 +37,7 @@ const partidesGuanyades = document.querySelector("#partides-guanyades");
 const recordActual = document.querySelector("#record-partida");
 
 /* ---Tarjeta d'estadístiques del jugador1--- */
+const cartaJugador2 = document.querySelector("#card-jugador2");
 const nomJugadorTarjeta2 = document.querySelector("#nom-jugador2");
 const puntsActuals2 = document.querySelector("#punts-actuals2");
 const totalPartides2 = document.querySelector("#total-partides2");
@@ -146,8 +147,8 @@ const arrayJugadors = [jugador1];
 
 if (jugador2.nom !== null && jugador2.nom.trim() !== "") {
     arrayJugadors.push(jugador2);
-
-
+    
+    cartaJugador2.classList.add("show-card");
 }
 
 let torn = 0;
@@ -163,6 +164,9 @@ console.log("El record es " + record);
 console.log("La data del record es: " + dataRecord)
 console.log(navegadorWeb);
 console.log("Objecte jugador = ", jugador1);*/
+
+console.log(nomJugador2);
+console.log(arrayJugadors.length);
 
 //Canvi del fons de pantalla segons el navegador
 document.body.classList.add(canviarClasseNavegador(navigator.userAgent));
@@ -273,13 +277,16 @@ mostrarTargetaJugador2();
 /* ---CANVIAR DE JUGADOR SEGONS EL TORN--- */
 const canviarJugador = () => {          //jugador1
     if (torn%arrayJugadors.length===0){
-        
+        cartaJugador.classList.add("active-player");
+        cartaJugador2.classList.remove("active-player");
     }
     else{                               //jugador2
-
+        cartaJugador2.classList.add("active-player");
+        cartaJugador.classList.remove("active-player");
     }
 }
 
+canviarJugador();
 
 /* ---COMENÇAR PARTIDA--- */
 //Mostrar títol
@@ -492,7 +499,14 @@ const mostrarDialegEmpat = () =>{
 /* ---LÒGICA DE GUANYA I PERDRE--- */
 
 //Guanyar la partida 
-const guanyarPartida = (punts, record, dataRecord, partides, nomJugador, guanyades, punts, ratxa, contErrors) => {
+const guanyarPartida = (punts, 
+                        record, 
+                        dataRecord, 
+                        partides, 
+                        nomJugador, 
+                        guanyades, 
+                        ratxa, 
+                        contErrors) => {
     if(punts>record){
         record=punts;
         dataRecord= new Date();
