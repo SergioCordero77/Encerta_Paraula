@@ -48,16 +48,15 @@ let contErrors = 0;
 
 // Variables Jugador1
 let punts = 0;
-let partides = Number(localStorage.getItem("partides")) || 0;
-let guanyades = Number(localStorage.getItem("guanyades")) || 0;
+let partides = /*Number(localStorage.getItem("partides")) ||*/ 0;
+let guanyades = /*Number(localStorage.getItem("guanyades")) ||*/ 0;
 let ratxa = 0;
 
 // Variables Jugador2
 let punts2 = 0;
-let partides2 = Number(localStorage.getItem("partides")) || 0;
-let guanyades2 = Number(localStorage.getItem("guanyades")) || 0;
+let partides2 = /*Number(localStorage.getItem("partides")) ||*/ 0;
+let guanyades2 = /*Number(localStorage.getItem("guanyades")) ||*/ 0;
 let ratxa2 = 0;
-
 //Teclat lletres
 const teclat = document.querySelector("#teclat-lletres");
 
@@ -255,7 +254,7 @@ const mostrarTargetaJugador1 = () => {
 }
 
 const mostrarTargetaJugador2 = () => {
-    nomJugador2.textContent = nomJugador2; 
+    nomJugadorTarjeta2.textContent = nomJugador2; 
     puntsActuals2.textContent = punts2;
     totalPartides2.textContent = partides2;
     partidesGuanyades2.textContent = guanyades2;
@@ -486,13 +485,21 @@ const guanyarPartida = () => {
 
     //Mostrem la tarjeta amb la informació actualitzada
     mostrarTargetaJugador1();
+    mostrarTargetaJugador2();
     
     //Actualitzem la informació del jugador1 i la guardem al localStorage
     actualitzarJugador1();
+    actualitzarJugador2();
 
-    //Reiniciem puntuació, ratxa i contErrors
+    //Reiniciem puntuació, ratxa del jugador1
     punts = 0;
     ratxa = 0;
+
+    //Reiniciem puntuació, ratxa del jugador2
+    punts = 0;
+    ratxa = 0;
+
+    //Reiniciem comptador d'errors
     contErrors = 0;
 
     mostrarDialegGuanyar();
@@ -526,13 +533,21 @@ const perdrePartida = () => {
 
     //Mostrem la tarjeta amb la informació actualitzada
     mostrarTargetaJugador1();
-
+    mostrarTargetaJugador2();
+    
     //Actualitzem la informació del jugador1 i la guardem al localStorage
     actualitzarJugador1();
+    actualitzarJugador2();
 
-    //Reiniciem puntuació, ratxa i contErrors
+    //Reiniciem puntuació, ratxa del jugador1
     punts = 0;
     ratxa = 0;
+
+    //Reiniciem puntuació, ratxa del jugador2
+    punts = 0;
+    ratxa = 0;
+
+    //Reiniciem comptador d'errors
     contErrors = 0;
 
     mostrarDialegPerdre();
@@ -545,16 +560,32 @@ const perdrePartida = () => {
 
 /* ---LÓGICA DE PUNTS--- */
 const puntsPerLletraEncertada = (vegades) => {
-    ratxa++;                     //Augmentem +1 la ratxa cada vegada que s'encerta una lletra
+    if (torn%arrayJugadors.length===0){
+        ratxa++;                     //Augmentem +1 la ratxa cada vegada que s'encerta una lletra
 
-    punts += vegades*ratxa;
+        punts += vegades*ratxa;
+    }
+    else{
+        ratxa2++;                     //Augmentem +1 la ratxa cada vegada que s'encerta una lletra
+
+        punts2 += vegades*ratxa2;
+    }
 }
 
 const puntsPerLletraFallada = () => {
-    ratxa = 0;                  //Reiniciem la ratxa
-    
-    if(punts>0){
-        punts--;
+    if(torn%arrayJugadors.length===0){
+        ratxa = 0;                  //Reiniciem la ratxa
+        
+        if(punts>0){
+            punts--;
+        }
+    }
+    else{
+        ratxa2 = 0;                  //Reiniciem la ratxa
+        
+        if(punts2>0){
+            punts2--;
+        }
     }
 }
 
@@ -596,6 +627,7 @@ const verificarLletra = (event) => {
         
         // Si no s'ha encertat la lletra
         if(!lletraEncertada){
+
             puntsPerLletraFallada();
 
             console.log(punts);
@@ -613,6 +645,9 @@ const verificarLletra = (event) => {
 
             //Mostrem la tarjeta amb la informació actualitzada
             mostrarTargetaJugador1();
+            mostrarTargetaJugador2();
+
+            torn++;
 
             return;
         }
@@ -622,6 +657,7 @@ const verificarLletra = (event) => {
 
             //Mostrem la tarjeta amb la informació actualitzada
             mostrarTargetaJugador1();
+            mostrarTargetaJugador2();
         }
 
         // Actualizem la paraula oculta
