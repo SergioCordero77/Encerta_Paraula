@@ -29,6 +29,7 @@ const imatgeGlobus = document.querySelector("#img-globus");
 /* ---JUGADORS--- */
 
 /* ---Tarjeta d'estadístiques del jugador1--- */
+
 const nomJugador = document.querySelector("#nom-jugador");
 const puntsActuals = document.querySelector("#punts-actuals");
 const totalPartides = document.querySelector("#total-partides");
@@ -269,7 +270,16 @@ const mostrarTargetaJugador2 = () => {
 mostrarTargetaJugador1();
 mostrarTargetaJugador2();
 
-/* --------------------- */
+/* ---CANVIAR DE JUGADOR SEGONS EL TORN--- */
+const canviarJugador = () => {          //jugador1
+    if (torn%arrayJugadors.length===0){
+        
+    }
+    else{                               //jugador2
+
+    }
+}
+
 
 /* ---COMENÇAR PARTIDA--- */
 //Mostrar títol
@@ -443,9 +453,34 @@ const mostrarDialegGuanyar = () =>{
 
 //Diàleg quan perds la partida
 const mostrarDialegPerdre = () =>{
+    if (arrayJugadors.length ===1){
+        dialegError.classList.add("dialeg-fi-partida")
+        titolError.textContent = "Oh no!"
+        missatgeError.textContent = "Has perdut!"
+        //imatge del dialeg
+        imatgeDialeg.src = "img/gif_guanyar_perdre/perdre.gif"
+        imatgeDialeg.alt = "GIF animat de perdre"
+        imatgeDialeg.classList.add("img-dialog")
+                
+        dialegError.showModal();
+    }
+    else{
+        dialegError.classList.add("dialeg-fi-partida")
+        titolError.textContent = "Oh no!"
+        missatgeError.textContent = "No hi ha hagut cap guanyador!"
+        //imatge del dialeg
+        imatgeDialeg.src = "img/gif_guanyar_perdre/perdre.gif"
+        imatgeDialeg.alt = "GIF animat de perdre"
+        imatgeDialeg.classList.add("img-dialog")
+                
+        dialegError.showModal();
+    }
+}
+
+const mostrarDialegEmpat = () =>{
     dialegError.classList.add("dialeg-fi-partida")
-    titolError.textContent = "Oh no!"
-    missatgeError.textContent = "Has perdut!"
+    titolError.textContent = "Empat"
+    missatgeError.textContent = "Era difícil, pero heu empatat"
     //imatge del dialeg
     imatgeDialeg.src = "img/gif_guanyar_perdre/perdre.gif"
     imatgeDialeg.alt = "GIF animat de perdre"
@@ -457,13 +492,13 @@ const mostrarDialegPerdre = () =>{
 /* ---LÒGICA DE GUANYA I PERDRE--- */
 
 //Guanyar la partida 
-const guanyarPartida = () => {
+const guanyarPartida = (punts, record, dataRecord, partides, nomJugador, guanyades, punts, ratxa, contErrors) => {
     if(punts>record){
         record=punts;
         dataRecord= new Date();
 
         /* ---Guardem informació al LOCALSTORAGE--- */
-        localStorage.setItem("nomJugador1", nomJugador1);
+        localStorage.setItem("nomJugador1", nomJugador);
         localStorage.setItem("record", record);
         localStorage.setItem("dataRecord", dataRecord);
     }
@@ -520,7 +555,25 @@ const perdrePartida = () => {
         localStorage.setItem("dataRecord", dataRecord);
     }
     
-    partides++;
+    if (arrayJugadors.length===1){
+        partides++;
+    }
+    else{
+        //Mostrem la tarjeta amb la informació actualitzada
+        mostrarTargetaJugador2();
+
+        //Actualitzem la informació del jugador1 i la guardem al localStorage
+        actualitzarJugador2();
+
+        if(punts===punts2){
+            mostrarDialegEmpat();
+        }
+
+        //Reiniciem puntuació, ratxa del jugador2
+        punts2 = 0;
+        ratxa2 = 0;
+    }
+
     bannerTitle.classList.add("banner-title-lose");
 
     //Guardem les estadístiques de partides i guanyades amb els nous valors
@@ -533,17 +586,12 @@ const perdrePartida = () => {
 
     //Mostrem la tarjeta amb la informació actualitzada
     mostrarTargetaJugador1();
-    mostrarTargetaJugador2();
     
     //Actualitzem la informació del jugador1 i la guardem al localStorage
     actualitzarJugador1();
     actualitzarJugador2();
 
     //Reiniciem puntuació, ratxa del jugador1
-    punts = 0;
-    ratxa = 0;
-
-    //Reiniciem puntuació, ratxa del jugador2
     punts = 0;
     ratxa = 0;
 
@@ -560,13 +608,13 @@ const perdrePartida = () => {
 
 /* ---LÓGICA DE PUNTS--- */
 const puntsPerLletraEncertada = (vegades) => {
-    if (torn%arrayJugadors.length===0){
-        ratxa++;                     //Augmentem +1 la ratxa cada vegada que s'encerta una lletra
+    if (torn%arrayJugadors.length===0){ //Jugador1
+        ratxa++;                        //Augmentem +1 la ratxa cada vegada que s'encerta una lletra
 
         punts += vegades*ratxa;
     }
-    else{
-        ratxa2++;                     //Augmentem +1 la ratxa cada vegada que s'encerta una lletra
+    else{                               //jugador2
+        ratxa2++;                       //Augmentem +1 la ratxa cada vegada que s'encerta una lletra
 
         punts2 += vegades*ratxa2;
     }
@@ -639,8 +687,10 @@ const verificarLletra = (event) => {
 
             //Derrota
             // Si el comptador arriva a 9, es perd la partida
-            if (contErrors===9){
-                perdrePartida();
+            if(arrayJugadors.length===1){
+                if (contErrors===9){
+                    perdrePartida();
+                }
             }
 
             //Mostrem la tarjeta amb la informació actualitzada
@@ -648,6 +698,8 @@ const verificarLletra = (event) => {
             mostrarTargetaJugador2();
 
             torn++;
+
+            //Canvi de jugador
 
             return;
         }
@@ -674,7 +726,45 @@ const verificarLletra = (event) => {
         //Victoria
         //Si a la paraula oculta no hi ha '_' vol dir que ja s'ha encertat la paraula
         if (!paraulaOculta.includes("_")){
-            guanyarPartida();
+            if(arrayJugadors.length===1){
+                guanyarPartida (punts, 
+                                record, 
+                                dataRecord, 
+                                partides, 
+                                nomJugador1, 
+                                guanyades, 
+                                punts, 
+                                ratxa, 
+                                contErrors);
+            }
+            else{
+                if(punts>punts2){                   //Guanya jugador1
+                    guanyarPartida (punts, 
+                                    record, 
+                                    dataRecord, 
+                                    partides, 
+                                    nomJugador1, 
+                                    guanyades, 
+                                    punts, 
+                                    ratxa, 
+                                    contErrors);
+                }
+                else if (punts2>punts){             //Guanya jugador2
+                    guanyarPartida (punts2, 
+                                    record, 
+                                    dataRecord, 
+                                    partides2, 
+                                    nomJugador2, 
+                                    guanyades2, 
+                                    punts2, 
+                                    ratxa2, 
+                                    contErrors);
+                }
+                else {
+                    
+                }
+            }
+            
         }
     }
 }

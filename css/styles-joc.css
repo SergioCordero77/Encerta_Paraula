@@ -173,6 +173,11 @@ body {
     /*display: none;*/
 }
 
+.active-player {
+    background-color: #4b7613;
+    box-shadow: 0 0 10px #7fff00, 0 0 20px #7fff00;
+}
+
 .stats-header {
     font-size: 1.35rem; /* Text del nom lleugerament més gran */
     font-weight: bold;
