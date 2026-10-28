@@ -37,8 +37,8 @@ const recordActual = document.querySelector("#record-partida");
 let contErrors = 0;
 
 let punts = 0;
-let partides = 0;
-let guanyades = 0;
+let partides = Number(localStorage.getItem("partides")) || 0;
+let guanyades = Number(localStorage.getItem("guanyades")) || 0;
 let ratxa = 0;
 
 //Teclat lletres
@@ -180,7 +180,13 @@ const mostrarTargetaJugador1 = () => {
     nomJugador.textContent = nomJugador1;
     puntsActuals.textContent = punts;
     totalPartides.textContent = partides;
-    partidesGuanyades.textContent = guanyades;
+
+    if (partides===0){
+        partidesGuanyades.textContent = guanyades + " - (0%)";
+    }
+    else{
+        partidesGuanyades.textContent = guanyades + " - (" + (guanyades/partides)*100 + "%)";
+    }
 
     if (record===0 || nomJugador1===null){
         recordActual.textContent = "Encara no establert"
@@ -221,6 +227,25 @@ const reiniciarDialeg = () => {
 const comencarPartida = () => {
     const valorParaula = inputParaula.value.trim();
     const patroNum = /[0-9]/;
+    // Inglés: lletres de la A a la Z
+    const patroEN = /^[A-Za-z]+$/;
+
+    // Español: lletres de la A a la Z y la ñ
+    const patroES = /^[A-Za-zñÑ]+$/;
+
+    // Català: lletres de la A a la Z i la ç 
+    const patroCA = /^[A-Za-zçÇ]+$/;
+
+    // Establir quin patró utilitzarem segons l'idioma del joc
+    let patroIdioma;
+
+    if (mostrarIdioma (idiomaProva) === "EN") {
+        patroIdioma = patroEN;
+    } else if (mostrarIdioma (idiomaProva) === "ES") {
+        patroIdioma = patroES;
+    } else if (mostrarIdioma (idiomaProva) === "CA") {
+        patroIdioma = patroCA;
+    }
 
     if(valorParaula === ""){
         titolError.textContent = "Error"
@@ -248,6 +273,25 @@ const comencarPartida = () => {
             titolError.textContent = "Error"
             missatgeError.textContent = "La paraula no pot contenir números";
             
+            reiniciarDialeg();
+
+            dialegError.showModal();
+
+            return;
+        }
+
+        if (!patroIdioma.test(valorParaula)) {
+            titolError.textContent = "Error";
+
+            if (mostrarIdioma (idiomaProva) === "EN") {
+                missatgeError.textContent = "La paraula només pot contenir lletres vàlides de l'anglès";
+            } else if (mostrarIdioma (idiomaProva) === "ES") {
+                missatgeError.textContent = "La paraula només pot contenir lletres vàlides de l'espanyol (sense accents)";
+            } else if (mostrarIdioma (idiomaProva) === "CA") {
+                missatgeError.textContent = "La paraula només pot contenir lletres vàlides del català (sense accents)";
+            }
+            
+
             reiniciarDialeg();
 
             dialegError.showModal();
@@ -352,6 +396,9 @@ const guanyarPartida = () => {
     guanyades++;
     bannerTitle.classList.add("banner-title-win");
 
+    //Guardem les estadístiques de partides i guanyades amb els nous valors
+    guardarEstadistiques()
+
     //Tornem a habilita el input de la paraula i el botó començar
     botoComencarPartida.disabled = false;
     inputParaula.disabled = false;
@@ -391,6 +438,9 @@ const perdrePartida = () => {
     
     partides++;
     bannerTitle.classList.add("banner-title-lose");
+
+    //Guardem les estadístiques de partides i guanyades amb els nous valors
+    guardarEstadistiques()
 
     //Tornem a habilita el input de la paraula i el botó començar
     botoComencarPartida.disabled = false;
@@ -572,6 +622,11 @@ crearTeclat();
 const buidarTeclat = () => {
     teclat.replaceChildren();
 }
+
+function guardarEstadistiques() {
+    localStorage.setItem("partides", partides);
+    localStorage.setItem("guanyades", guanyades);
+};
 
 /* ==========================================================================
    Events
