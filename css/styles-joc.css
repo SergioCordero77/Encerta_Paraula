@@ -167,6 +167,12 @@ body {
     justify-content: center;
 }
 
+/* Targeta del jugador 2 amb fons verd */
+#card-jugador2 {
+    background-color: #4b7613;
+    /*display: none;*/
+}
+
 .stats-header {
     font-size: 1.35rem; /* Text del nom lleugerament més gran */
     font-weight: bold;

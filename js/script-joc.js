@@ -26,20 +26,36 @@ const titol = document.querySelector("#main-title");
 //Imatge de globus
 const imatgeGlobus = document.querySelector("#img-globus");
 
-/* ---Tarjeta d'estadístiques del jugador--- */
+/* ---JUGADORS--- */
+
+/* ---Tarjeta d'estadístiques del jugador1--- */
 const nomJugador = document.querySelector("#nom-jugador");
 const puntsActuals = document.querySelector("#punts-actuals");
 const totalPartides = document.querySelector("#total-partides");
 const partidesGuanyades = document.querySelector("#partides-guanyades");
 const recordActual = document.querySelector("#record-partida");
 
-//variables de partida
+/* ---Tarjeta d'estadístiques del jugador1--- */
+const nomJugadorTarjeta2 = document.querySelector("#nom-jugador2");
+const puntsActuals2 = document.querySelector("#punts-actuals2");
+const totalPartides2 = document.querySelector("#total-partides2");
+const partidesGuanyades2 = document.querySelector("#partides-guanyades2");
+const recordActual2 = document.querySelector("#record-partida2");
+
+/* ---variables de partida--- */ 
 let contErrors = 0;
 
+// Variables Jugador1
 let punts = 0;
 let partides = Number(localStorage.getItem("partides")) || 0;
 let guanyades = Number(localStorage.getItem("guanyades")) || 0;
 let ratxa = 0;
+
+// Variables Jugador2
+let punts2 = 0;
+let partides2 = Number(localStorage.getItem("partides")) || 0;
+let guanyades2 = Number(localStorage.getItem("guanyades")) || 0;
+let ratxa2 = 0;
 
 //Teclat lletres
 const teclat = document.querySelector("#teclat-lletres");
@@ -72,6 +88,7 @@ const navegadorWeb = JSON.parse(sessionStorage.getItem("navegadorWeb"));
 const idiomaProva = navegadorWeb.idioma;
 
 const nomJugador1 = llegirCookie("jugador1");
+const nomJugador2 = llegirCookie("jugador2");
 
 function llegirCookie(nom) {
     const cookies = document.cookie.split("; ");
@@ -88,7 +105,7 @@ function llegirCookie(nom) {
 //Títol de la pestanya
 document.title = nomJugador1 + "(" + guanyades + ")";
 
-//Ojecte jugador
+//Ojecte jugador jugador1
 const jugador1 = {
     nom: "",
     punts: 0,
@@ -105,6 +122,34 @@ jugador1.partides = partides;
 jugador1.guanyades = guanyades;
 jugador1.record = record;
 jugador1.dataRecord = dataRecord;
+
+//Ojecte jugador2
+const jugador2 = {
+    nom: "",
+    punts: 0,
+    partides: 0,
+    guanyades: 0,
+    record: 0,
+    dataRecord: ""
+};
+
+//Assignació d'atribut
+jugador2.nom = nomJugador2;
+jugador2.punts = punts2;
+jugador2.partides = partides2;
+jugador2.guanyades = guanyades2;
+jugador2.record = record;
+jugador2.dataRecord = dataRecord;
+
+const arrayJugadors = [jugador1];
+
+if (jugador2.nom !== null && jugador2.nom.trim() !== "") {
+    arrayJugadors.push(jugador2);
+
+
+}
+
+let torn = 0;
 
 /* ==========================================================================
    Funcions
@@ -397,7 +442,7 @@ const guanyarPartida = () => {
     bannerTitle.classList.add("banner-title-win");
 
     //Guardem les estadístiques de partides i guanyades amb els nous valors
-    guardarEstadistiques()
+    guardarEstadistiques(partides, guanyades)
 
     //Tornem a habilita el input de la paraula i el botó començar
     botoComencarPartida.disabled = false;
@@ -440,7 +485,7 @@ const perdrePartida = () => {
     bannerTitle.classList.add("banner-title-lose");
 
     //Guardem les estadístiques de partides i guanyades amb els nous valors
-    guardarEstadistiques()
+    guardarEstadistiques(partides, guanyades)
 
     //Tornem a habilita el input de la paraula i el botó començar
     botoComencarPartida.disabled = false;
@@ -623,7 +668,7 @@ const buidarTeclat = () => {
     teclat.replaceChildren();
 }
 
-function guardarEstadistiques() {
+function guardarEstadistiques(partides, guanyades) {
     localStorage.setItem("partides", partides);
     localStorage.setItem("guanyades", guanyades);
 };
