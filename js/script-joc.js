@@ -42,7 +42,8 @@ const totalPartides2 = document.querySelector("#total-partides2");
 const partidesGuanyades2 = document.querySelector("#partides-guanyades2");
 const recordActual2 = document.querySelector("#record-partida2");
 
-/* ---variables de partida--- */ 
+/* ---VARIABLES DELS JUGADORS --- */
+
 let contErrors = 0;
 
 // Variables Jugador1
@@ -179,6 +180,18 @@ const actualitzarJugador1 = () => {
 
 actualitzarJugador1();
 
+//Funció per actualitzat els atributs del jugador2
+const actualitzarJugador2 = () => {
+    jugador2.nom = nomJugador1; //agafar no player2 per cookies
+    jugador2.punts = punts2;
+    jugador2.partides = partides2;
+    jugador2.guanyades = guanyades2;
+    jugador2.record = record;
+    jugador2.dataRecord = dataRecord;
+};
+
+actualitzarJugador2();
+
 /* ---TORNAR--- */
 //Tornar a la pàgina principal
 const tornar = () => {
@@ -219,7 +232,7 @@ const mostrarParaula = () => {
     }
 }
 
-/* ---TARGETA DEL JUGADOR--- */
+/* ---TARGETA DELS JUGADORS--- */
 
 const mostrarTargetaJugador1 = () => {
     nomJugador.textContent = nomJugador1;
@@ -240,6 +253,19 @@ const mostrarTargetaJugador1 = () => {
         recordActual.textContent = dataRecord + " - " + record; 
     }
 }
+
+const mostrarTargetaJugador2 = () => {
+    nomJugador2.textContent = nomJugador2; 
+    puntsActuals2.textContent = punts2;
+    totalPartides2.textContent = partides2;
+    partidesGuanyades2.textContent = guanyades2;
+
+    if (record === 0) {
+        recordActual2.textContent = "Encara no establert";
+    } else {
+        recordActual2.textContent = dataRecord + " - " + record;
+    }
+};
 
 mostrarTargetaJugador1();
 
