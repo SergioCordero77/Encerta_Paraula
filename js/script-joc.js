@@ -104,9 +104,6 @@ function llegirCookie(nom) {
     return null;
 }
 
-//Títol de la pestanya
-document.title = nomJugador1 + "(" + guanyades + ")";
-
 //Ojecte jugador jugador1
 const jugador1 = {
     nom: "",
@@ -152,6 +149,14 @@ if (jugador2.nom !== null && jugador2.nom.trim() !== "") {
 }
 
 let torn = 0;
+
+//Actualitzem el títol / pestaña
+if (arrayJugadors.length===1){
+    document.title = nomJugador1 + "(" + guanyades + ")";
+}
+else{
+    document.title = nomJugador1 + "(" + guanyades + ")" + " vs " + nomJugador2 + "(" + guanyades2 + ")";
+}
 
 /* ==========================================================================
    Funcions
@@ -567,9 +572,12 @@ const guanyarPartida = (puntsJugador,
     inputParaula.disabled = false;
     inputParaula.placeholder="Introduceix una paraula";
 
+    //Actualitzem el títol / pestaña
     if (arrayJugadors.length===1){
-        //Actualitzem el títol / pestaña
         document.title = nomJugador1 + "(" + guanyades + ")";
+    }
+    else{
+        document.title = nomJugador1 + "(" + guanyades + ")" + " vs " + nomJugador2 + "(" + guanyades2 + ")";
     }
 
     //Mostrem la tarjeta amb la informació actualitzada
