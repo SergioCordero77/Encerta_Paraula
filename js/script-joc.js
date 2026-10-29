@@ -183,7 +183,7 @@ actualitzarJugador1();
 
 //Funció per actualitzat els atributs del jugador2
 const actualitzarJugador2 = () => {
-    jugador2.nom = nomJugador1; //agafar no player2 per cookies
+    jugador2.nom = nomJugador2; //agafar no player2 per cookies
     jugador2.punts = punts2;
     jugador2.partides = partides2;
     jugador2.guanyades = guanyades2;
@@ -244,7 +244,7 @@ const mostrarTargetaJugador1 = () => {
         partidesGuanyades.textContent = guanyades + " - (0%)";
     }
     else{
-        partidesGuanyades.textContent = guanyades + " - (" + (guanyades/partides)*100 + "%)";
+        partidesGuanyades.textContent = guanyades + " - (" + ((guanyades/partides)*100).toFixed(1) + "%)";
     }
 
     if (record===0 || nomJugador1===null){
@@ -259,7 +259,13 @@ const mostrarTargetaJugador2 = () => {
     nomJugadorTarjeta2.textContent = nomJugador2; 
     puntsActuals2.textContent = punts2;
     totalPartides2.textContent = partides2;
-    partidesGuanyades2.textContent = guanyades2;
+
+    if (partides===0){
+        partidesGuanyades2.textContent = guanyades2 + " - (0%)";
+    }
+    else{
+        partidesGuanyades2.textContent = guanyades2 + " - (" + ((guanyades2/partides2)*100).toFixed(1) + "%)";
+    }
 
     if (record === 0) {
         recordActual2.textContent = "Encara no establert";
@@ -271,7 +277,7 @@ const mostrarTargetaJugador2 = () => {
 mostrarTargetaJugador1();
 mostrarTargetaJugador2();
 
-/* ---CANVIAR DE JUGADOR SEGONS EL TORN--- */
+/* ---CANVIAR DE CLASSE LA TARJETA DEL JUGADOR SEGONS EL TORN--- */
 const canviarJugador = () => {
     if (arrayJugadors.length>1){          
         if (torn%arrayJugadors.length===0){ //jugador1
@@ -450,8 +456,22 @@ const tancarDialeg = () => {
 //Diàleg quan guanyes la partida
 const mostrarDialegGuanyar = () =>{
     dialegError.classList.add("dialeg-fi-partida")
-    titolError.textContent = "Felicitats"
-    missatgeError.textContent = "Has guanyat";
+
+    if(arrayJugadors.length===1){
+        titolError.textContent = "Felicitats"
+        missatgeError.textContent = "Has guanyat";
+    }
+    else{
+        if (punts>punts2){
+            titolError.textContent = jugador1.nom + " ha guanya!"
+            missatgeError.textContent = "Enhorabona! Ben jugat";
+        }
+        else {
+            titolError.textContent = jugador2.nom + " ha guanya!"
+            missatgeError.textContent = "Enhorabona! Ben jugat";
+        }
+    }
+
     //imatge del dialeg
     imatgeDialeg.src = "img/gif_guanyar_perdre/guanyar.gif"
     imatgeDialeg.alt = "GIF animat de guanya"
@@ -491,7 +511,7 @@ const mostrarDialegEmpat = () =>{
     titolError.textContent = "Empat"
     missatgeError.textContent = "Era difícil, pero heu empatat"
     //imatge del dialeg
-    imatgeDialeg.src = "img/gif_guanyar_perdre/perdre.gif"
+    imatgeDialeg.src = "img/gif_guanyar_perdre/empatar.gif"
     imatgeDialeg.alt = "GIF animat de perdre"
     imatgeDialeg.classList.add("img-dialog")
             
@@ -503,7 +523,8 @@ const mostrarDialegEmpat = () =>{
 //Guanyar la partida 
 const guanyarPartida = (puntsJugador, 
                         recordJugador,  
-                        partidesJugador, 
+                        partidesJugador,
+                        partidesJugador2, 
                         nomJugador, 
                         guanyadesJugador) => { 
                         
@@ -520,10 +541,18 @@ const guanyarPartida = (puntsJugador,
     //Actualitzem estadístiques
     partidesJugador++;
     guanyadesJugador++;
+    partidesJugador2++;
 
     //Asignem els valors actualitzats
     partides = partidesJugador;
-    guanyades = guanyadesJugador;
+    partides2 = partidesJugador2;
+
+    if(torn%arrayJugadors.length===0){
+        guanyades = guanyadesJugador;
+    }
+    else{
+        guanyades2 = guanyadesJugador;
+    }
 
     bannerTitle.classList.add("banner-title-win");
 
@@ -588,10 +617,6 @@ const perdrePartida = () => {
         //Actualitzem la informació del jugador1 i la guardem al localStorage
         actualitzarJugador2();
 
-        if(punts===punts2){
-            mostrarDialegEmpat();
-        }
-
         //Reiniciem puntuació, ratxa del jugador2
         punts2 = 0;
         ratxa2 = 0;
@@ -609,6 +634,7 @@ const perdrePartida = () => {
 
     //Mostrem la tarjeta amb la informació actualitzada
     mostrarTargetaJugador1();
+    mostrarTargetaJugador2();
     
     //Actualitzem la informació del jugador1 i la guardem al localStorage
     actualitzarJugador1();
@@ -710,19 +736,17 @@ const verificarLletra = (event) => {
 
             //Derrota
             // Si el comptador arriva a 9, es perd la partida
-            if(arrayJugadors.length===1){
-                if (contErrors===9){
-                    perdrePartida();
-                }
+            if (contErrors===9){
+                perdrePartida();
             }
 
             //Mostrem la tarjeta amb la informació actualitzada
             mostrarTargetaJugador1();
             mostrarTargetaJugador2();
 
-            torn++;
-
             //Canvi de jugador
+            torn++;
+            canviarJugador();
 
             return;
         }
@@ -752,7 +776,8 @@ const verificarLletra = (event) => {
             if(arrayJugadors.length===1){
                 guanyarPartida (punts, 
                                 record,  
-                                partides, 
+                                partides,
+                                partides2, 
                                 nomJugador1, 
                                 guanyades);
             }
@@ -760,19 +785,33 @@ const verificarLletra = (event) => {
                 if(punts>punts2){                   //Guanya jugador1
                     guanyarPartida (punts, 
                                 record,  
-                                partides, 
+                                partides,
+                                partides2, 
                                 nomJugador1, 
                                 guanyades);
                 }
                 else if (punts2>punts){             //Guanya jugador2
                     guanyarPartida (punts2, 
                                     record,  
-                                    partides2, 
+                                    partides2,
+                                    partides, 
                                     nomJugador2, 
                                     guanyades2);
                 }
                 else {
+                    mostrarDialegEmpat();
+
+                    //Reiniciem punts
+                    punts = 0;
+                    punts2 = 0;
+
+                    //Mostrem la tarjeta amb la informació actualitzada
+                    mostrarTargetaJugador1();
+                    mostrarTargetaJugador2();
                     
+                    //Actualitzem la informació del jugador1 i la guardem al localStorage
+                    actualitzarJugador1();
+                    actualitzarJugador2();
                 }
             }
             
