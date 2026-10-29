@@ -228,6 +228,11 @@ body {
     max-width: 92%;
     max-height: 92%;
     object-fit: contain;
+    display: none;
+}
+
+.image-box img.show-img {
+    display: block;
 }
 
 /* ==========================================================================

@@ -46,7 +46,7 @@ const recordActual2 = document.querySelector("#record-partida2");
 
 /* ---VARIABLES DELS JUGADORS --- */
 
-let contErrors = 0;
+let contErrors = -1;
 
 // Variables Jugador1
 let punts = 0;
@@ -442,6 +442,9 @@ const comencarPartida = () => {
     //Habilitem el teclat
     teclatHabilitat = true;
 
+    //Amagar imatge globus
+    imatgeGlobus.classList.remove("show-img");
+
     console.log("partides ", partides);
     console.log("guanyades ", guanyades);
 }
@@ -729,8 +732,15 @@ const verificarLletra = (event) => {
 
             console.log(punts);
 
+            contErrors++;
+
             // Actualitzem les imatges
-            imatgeGlobus.src = "img/img_globus/img_" + ++contErrors + ".png";
+            if (contErrors>=0){
+                imatgeGlobus.classList.add("show-img");
+            }
+            
+            imatgeGlobus.src = "img/img_globus/img_" + contErrors + ".png";
+            
             event.currentTarget.disabled = true;                    //Deshabilitem el botó de la lletra clickada
             event.currentTarget.classList.add("key-btn-desabled");  //Canviem la classe per assenyalar que el botó està deshabilitat
 
