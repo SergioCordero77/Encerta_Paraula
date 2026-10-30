@@ -315,6 +315,11 @@ const comencarPartida = (event) => {
     document.cookie = "jugador1=" + encodeURIComponent(nomJugador1);
     document.cookie = "jugador2=" + encodeURIComponent(nomJugador2);
 
+    /* ---LOCALSTORAGE--- */
+    // Reiniciem historial de partides i guanyades anteriors
+    localStorage.removeItem("partides");
+    localStorage.removeItem("guanyades");
+
     form.reset();
 
     window.location.assign("joc.html");

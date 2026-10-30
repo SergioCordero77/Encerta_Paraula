@@ -50,15 +50,16 @@ let contErrors = -1;
 
 // Variables Jugador1
 let punts = 0;
-let partides = /*Number(localStorage.getItem("partides")) ||*/ 0;
-let guanyades = /*Number(localStorage.getItem("guanyades")) ||*/ 0;
+let partides = Number(localStorage.getItem("partides")) || 0;
+let guanyades = Number(localStorage.getItem("guanyades")) || 0;
 let ratxa = 0;
 
 // Variables Jugador2
 let punts2 = 0;
-let partides2 = /*Number(localStorage.getItem("partides")) ||*/ 0;
-let guanyades2 = /*Number(localStorage.getItem("guanyades")) ||*/ 0;
+let partides2 = Number(localStorage.getItem("partides")) || 0;
+let guanyades2 = Number(localStorage.getItem("guanyades")) || 0;
 let ratxa2 = 0;
+
 //Teclat lletres
 const teclat = document.querySelector("#teclat-lletres");
 
@@ -161,14 +162,6 @@ else{
 /* ==========================================================================
    Funcions
    ========================================================================== */
-/*
-console.log("Cookie:", document.cookie);
-console.log("El nom del jugador1 és: " + nomJugador1);
-console.log("El nom amb el record és: " + nomJugadorRecord);
-console.log("El record es " + record);
-console.log("La data del record es: " + dataRecord)
-console.log(navegadorWeb);
-console.log("Objecte jugador = ", jugador1);*/
 
 //Canvi del fons de pantalla segons el navegador
 document.body.classList.add(canviarClasseNavegador(navigator.userAgent));
