@@ -268,7 +268,7 @@ const mostrarTargetaJugador2 = () => {
     if (record === 0) {
         recordActual2.textContent = "Encara no establert";
     } else {
-        recordActual2.textContent = dataRecord + " - " + record;
+        recordActual2.textContent = dataRecord.toLocaleString() + " - " + record;
     }
 };
 
@@ -288,8 +288,6 @@ const canviarJugador = () => {
         }
     }
 }
-
-canviarJugador();
 
 /* ---COMENÇAR PARTIDA--- */
 //Mostrar títol
@@ -381,13 +379,36 @@ const comencarPartida = () => {
             } else if (mostrarIdioma (idiomaProva) === "CA") {
                 missatgeError.textContent = "La paraula només pot contenir lletres vàlides del català (sense accents)";
             }
-            
 
             reiniciarDialeg();
 
             dialegError.showModal();
 
             return;
+        }
+
+        if (arrayJugadors.length===2){
+            if (partides===0){
+
+                torn = Math.floor(Math.random()*2);
+
+                if (torn%arrayJugadors.length===0){
+                    titolError.textContent = "Comença jugant " + nomJugador1;
+                    missatgeError.textContent = "";
+
+                    canviarJugador();
+                }
+                else{
+                    titolError.textContent = "Comença jugant " + nomJugador2;
+                     missatgeError.textContent = "";
+
+                    canviarJugador();
+                }
+            }
+
+            reiniciarDialeg();
+
+            dialegError.showModal();
         }
     }
 
