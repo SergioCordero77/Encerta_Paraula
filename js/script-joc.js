@@ -249,7 +249,7 @@ const mostrarTargetaJugador1 = () => {
         recordActual.textContent = "Encara no establert"
     }
     else{
-        recordActual.textContent = dataRecord + " - " + record; 
+        recordActual.textContent = dataRecord.toLocaleString() + " - " + record; 
     }
 }
 
@@ -442,9 +442,6 @@ const comencarPartida = () => {
 
     //Amagar imatge globus
     imatgeGlobus.classList.remove("show-img");
-
-    console.log("partides ", partides);
-    console.log("guanyades ", guanyades);
 }
 
 /* --- DIALEG --- */
